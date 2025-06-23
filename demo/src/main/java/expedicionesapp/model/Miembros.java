@@ -2,18 +2,21 @@
 package expedicionesapp.model;
 
 public class Miembros {
-    private int id_miembro;
+    private int id;
     private String nacionalidad;
     private String nombre;
     private String apellido;
     private String sexo;
-    private boolean es_lider;
-    private boolean es_staff;
+    private int es_lider;
+    private int es_staff;
     private int ano_nacimiento;
-    private boolean fallecido;
+    private int fallecido;
 
-    public Miembros(int id_miembro, String nacionalidad, String nombre, String apellido, String sexo, boolean es_lider, boolean es_staff, int ano_nacimiento, boolean fallecido) {
-        this.id_miembro = id_miembro;
+    public Miembros() {
+    }
+
+    public Miembros(int id, String nacionalidad, String nombre, String apellido, String sexo, int es_lider, int es_staff, int ano_nacimiento, int fallecido) {
+        this.id = id;
         this.nacionalidad = nacionalidad;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -23,40 +26,37 @@ public class Miembros {
         this.ano_nacimiento = ano_nacimiento;
         this.fallecido = fallecido;
     }
-    
 
-    public boolean isEs_lider() {
+    public int getEs_lider() {
         return es_lider;
     }
 
-    public void setEs_lider(boolean es_lider) {
+    public void setEs_lider(int es_lider) {
         this.es_lider = es_lider;
     }
 
-    public boolean isEs_staff() {
+    public int getEs_staff() {
         return es_staff;
     }
 
-    public void setEs_staff(boolean es_staff) {
+    public void setEs_staff(int es_staff) {
         this.es_staff = es_staff;
     }
 
-    public boolean isFallecido() {
+    public int getFallecido() {
         return fallecido;
     }
 
-    public void setFallecido(boolean fallecido) {
+    public void setFallecido(int fallecido) {
         this.fallecido = fallecido;
     }
     
-
-
-    public int getId_miembro() {
-        return id_miembro;
+    public int getId() {
+        return id;
     }
 
-    public void setId_miembro(int id_miembro) {
-        this.id_miembro = id_miembro;
+    public void setId(int id_miembro) {
+        this.id = id;
     }
 
     public String getNacionalidad() {
