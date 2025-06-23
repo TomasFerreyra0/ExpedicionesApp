@@ -27,6 +27,13 @@ public class ExpedicionesTableModel extends AbstractTableModel {
         fireTableDataChanged(); // Notifica a la tabla que los datos han cambiado
     }
 
+    public void addExpedicion(Expediciones expedicion) {
+    this.expediciones.add(expedicion);
+    // Notifica a la JTable que se ha insertado una nueva fila al final.
+    // Esto hace que la tabla se redibuje y muestre la nueva expedición.
+    fireTableRowsInserted(expediciones.size() - 1, expediciones.size() - 1);
+}
+    
     @Override
     public int getRowCount() {
         return expediciones.size();

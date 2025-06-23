@@ -6,6 +6,9 @@ package expedicionesapp.ui;
 
 import expedicionesapp.dao.ExpedicionesDao; 
 import expedicionesapp.model.Expediciones; 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel; 
 import javax.swing.event.ListSelectionEvent;
@@ -13,6 +16,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextField; 
 import java.text.SimpleDateFormat; 
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,6 +27,9 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
 
     // Declara una instancia de ExpedicionesDao
     private ExpedicionesDao expedicionesDao;
+    private ExpedicionesTableModel expedicionesTableModel;
+    
+    
     
     /**
      * Creates new form Expediciones
@@ -31,6 +38,18 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         initComponents();
         expedicionesDao = new ExpedicionesDao(); // Inicializa el DAO
         cargarTablaExpediciones(); // Llama al método para cargar la tabla al iniciar la ventana
+        
+        // 2. Inicializar y configurar el ExpedicionesTableModel para tu JTable
+        // Es crucial que 'tablaExpediciones' ya haya sido inicializada por initComponents()
+        expedicionesTableModel = new ExpedicionesTableModel(expedicionesDao.getAllExpeditions());
+        expedicionesTable.setModel(expedicionesTableModel); // <-- Aquí asocias el modelo a tu JTable
+        
+       nuevaExpedicionBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crearNuevaExpedicion();
+            }
+        });
         
         expedicionesTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -48,6 +67,83 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 }
             }
         });
+        
+        nuevaExpedicionBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                crearNuevaExpedicion();
+            }
+        });
+        
+    }
+    
+    private void crearNuevaExpedicion() {
+        try {
+
+            int idPico = Integer.parseInt(picoIdTxt.getText());
+            // Los campos que pueden estar vacíos y no son obligatorios, se pueden manejar con valores por defecto o null
+            int idAccidente = accidenteIdTxt.getText().isEmpty() ? 0 : Integer.parseInt(accidenteIdTxt.getText());
+            float altitud = altitudTxt.getText().isEmpty() ? 0.0f : Float.parseFloat(altitudTxt.getText());
+            int cupos = cuposTxt.getText().isEmpty() ? 0 : Integer.parseInt(cuposTxt.getText());
+            int conteoMortalidad = mortalidadTxt.getText().isEmpty() ? 0 : Integer.parseInt(mortalidadTxt.getText());
+
+            // Manejo de la fecha: Asumiendo formato "yyyy-MM-dd"
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date parsedDate = dateFormat.parse(fechaTxt.getText());
+            Date fechaSQL = new Date(parsedDate.getTime()); // Convertir a java.sql.Date
+
+            String resultado = resultadoTxt.getText();
+            String motivo = motivoTxt.getText();
+            String ruta = rutaTxt.getText();
+
+            // **b. Crear un objeto Expediciones con los datos del formulario**
+            Expediciones nuevaExpedicion = new Expediciones();
+            // El ID no se establece aquí porque es auto-incremental en la BD
+            nuevaExpedicion.setIdPico(idPico);
+            nuevaExpedicion.setIdAccidente(idAccidente);
+            nuevaExpedicion.setAltitud(altitud);
+            nuevaExpedicion.setCupos(cupos);
+            nuevaExpedicion.setConteoMortalidad(conteoMortalidad);
+            nuevaExpedicion.setFecha(fechaSQL);
+            nuevaExpedicion.setResultado(resultado);
+            nuevaExpedicion.setMotivo(motivo);
+            nuevaExpedicion.setRuta(ruta);
+
+            // **c. Llamar al método insertExpedition de ExpedicionesDao para guardar en la base de datos**
+            boolean insertadoExitosamente = expedicionesDao.insertExpedition(nuevaExpedicion);
+
+            if (insertadoExitosamente) {
+                // **d. Actualizar la tabla si la inserción fue exitosa**
+                // La expedición 'nuevaExpedicion' ahora tiene el ID generado por la DB
+                expedicionesTableModel.addExpedicion(nuevaExpedicion);
+                //JOptionPane.showMessageDialog(this, "Expedición creada y añadida a la tabla correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                // **e. Limpiar el formulario para la siguiente entrada (opcional pero recomendado)**
+                limpiarFormulario();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo insertar la expedición en la base de datos.", "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Error en el formato de la fecha. Por favor, use el formato AAAA-MM-DD (ej. 2025-06-23).", "Error de Formato de Fecha", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace(); // Para depuración
+        } catch (Exception ex) {
+            // Captura cualquier otra excepción inesperada
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al crear la expedición: " + ex.getMessage(), "Error Inesperado", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace(); // Para depuración
+        }
+    }
+    
+    private void limpiarFormulario() {
+        picoIdTxt.setText("");
+        accidenteIdTxt.setText("");
+        altitudTxt.setText("");
+        cuposTxt.setText("");
+        mortalidadTxt.setText("");
+        fechaTxt.setText("");
+        resultadoTxt.setText("");
+        motivoTxt.setText("");
+        rutaTxt.setText("");
     }
     
     
@@ -224,7 +320,6 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
 
         motivoLabel.setText("Motivo:");
 
-        picoIdTxt.setEditable(false);
         picoIdTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 picoIdTxtActionPerformed(evt);

@@ -37,7 +37,7 @@ public class ScreenFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\NetBeansProjects\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\logo.png")); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\GitHub\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\logo.png")); // NOI18N
         jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 300, 250));
 
         expedicionesButton.setBackground(new java.awt.Color(60, 93, 119));
@@ -58,10 +58,10 @@ public class ScreenFrame extends javax.swing.JFrame {
         newExpedicionButton.setText("Nueva Expedicion");
         jPanel1.add(newExpedicionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 179, 52));
 
-        bannerLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\NetBeansProjects\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\banner.png")); // NOI18N
+        bannerLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\GitHub\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\banner.png")); // NOI18N
         jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\NetBeansProjects\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\background.png")); // NOI18N
+        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\GitHub\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\background.png")); // NOI18N
         jPanel1.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
