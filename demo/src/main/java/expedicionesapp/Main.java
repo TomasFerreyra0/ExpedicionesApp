@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        /*PicoDao dao=new PicoDao();
+        /*PicoDao dao=new PicoDao(); Probamos las cosas
         MiembrosDao daom=new MiembrosDao();
         ExpedicionesDao daoe=new ExpedicionesDao();*/
         

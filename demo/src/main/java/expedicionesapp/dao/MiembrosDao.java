@@ -45,7 +45,7 @@ public class MiembrosDao {
 ///Aca Iria el mostrar Miembros por idExpedicion.
 
 
-    // 2. Insertar una nueva Expedición
+    // 2. Insertar un nuevo miembro
     public boolean insertMember(Miembros miembro) {
         String sql = """
             INSERT INTO Miembros (nacionalidad, nombre, apellido, sexo, es_lider, es_staff, año_nacimiento,fallecido)
@@ -87,7 +87,7 @@ public class MiembrosDao {
         }
     }
 
-    // 3. Actualizar una Expedición existente
+    // 3. Actualizar un miembro existente
     public boolean modifyMember(Miembros miembro) {
         String sql = """
             UPDATE Miembros SET nacionalidad=?, nombre=?, apellido=?, sexo=?, es_lider=?, es_staff=?, año_nacimiento=?,fallecido=?
@@ -121,7 +121,7 @@ public class MiembrosDao {
         }
     }
 
-    // 4. Eliminar una Expedición por ID
+    // 4. Eliminar un miembro por ID
     public boolean deleteMember(int idMiembro) {
         String sql = "DELETE FROM Miembros WHERE id = ?"; // Asumo 'id' es el PK
 
