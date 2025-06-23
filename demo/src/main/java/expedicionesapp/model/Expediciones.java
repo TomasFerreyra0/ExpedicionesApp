@@ -1,52 +1,57 @@
 package expedicionesapp.model;
 
+import java.util.Date;
+
 public class Expediciones {
-    private int id_expedicion;
-    private int id_accidente;
-    private int id_pico;
+    private int id;
+    private int idPico;
+    private int idAccidente;
     private float altitud;
-    private int cupo;
-    private int conteo_mortalidad;
-    private String fecha;
+    private int cupos;
+    private int conteoMortalidad;
+    private Date fecha;
     private String resultado;
     private String motivo;
     private String ruta;
 
-    public Expediciones(int id_expedicion, int id_accidente, int id_pico, float altitud, int cupo, int conteo_mortalidad, String fecha, String resultado, String motivo, String ruta) {
-        this.id_expedicion = id_expedicion;
-        this.id_accidente = id_accidente;
-        this.id_pico = id_pico;
+    public Expediciones() {
+    }
+
+    public Expediciones(int id, int idPico, int idAccidente, float altitud, int cupos, int conteoMortalidad, Date fecha, String resultado, String motivo, String ruta) {
+        this.id = id;
+        this.idPico = idPico;
+        this.idAccidente = idAccidente;
         this.altitud = altitud;
-        this.cupo = cupo;
-        this.conteo_mortalidad = conteo_mortalidad;
+        this.cupos = cupos;
+        this.conteoMortalidad = conteoMortalidad;
         this.fecha = fecha;
         this.resultado = resultado;
         this.motivo = motivo;
         this.ruta = ruta;
     }
 
-    public int getId_expedicion() {
-        return id_expedicion;
+    public int getId() {
+        return id;
     }
 
-    public void setId_expedicion(int id_expedicion) {
-        this.id_expedicion = id_expedicion;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getId_accidente() {
-        return id_accidente;
+    public int getIdPico() {
+        return idPico;
     }
 
-    public void setId_accidente(int id_accidente) {
-        this.id_accidente = id_accidente;
+    public void setIdPico(int idPico) {
+        this.idPico = idPico;
     }
 
-    public int getId_pico() {
-        return id_pico;
+    public int getIdAccidente() {
+        return idAccidente;
     }
 
-    public void setId_pico(int id_pico) {
-        this.id_pico = id_pico;
+    public void setIdAccidente(int idAccidente) {
+        this.idAccidente = idAccidente;
     }
 
     public float getAltitud() {
@@ -57,27 +62,27 @@ public class Expediciones {
         this.altitud = altitud;
     }
 
-    public int getCupo() {
-        return cupo;
+    public int getCupos() {
+        return cupos;
     }
 
-    public void setCupo(int cupo) {
-        this.cupo = cupo;
+    public void setCupos(int cupos) {
+        this.cupos = cupos;
     }
 
-    public int getConteo_mortalidad() {
-        return conteo_mortalidad;
+    public int getConteoMortalidad() {
+        return conteoMortalidad;
     }
 
-    public void setConteo_mortalidad(int conteo_mortalidad) {
-        this.conteo_mortalidad = conteo_mortalidad;
+    public void setConteoMortalidad(int conteoMortalidad) {
+        this.conteoMortalidad = conteoMortalidad;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
@@ -104,7 +109,6 @@ public class Expediciones {
     public void setRuta(String ruta) {
         this.ruta = ruta;
     }
-    
-    
+
     
 }

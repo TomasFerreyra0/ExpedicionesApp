@@ -3,17 +3,25 @@ import expedicionesapp.util.DBConnection;
 import expedicionesapp.dao.PicoDao;
 import expedicionesapp.dao.MiembrosDao;
 import expedicionesapp.dao.ExpedicionesDao;
+import expedicionesapp.ui.ScreenFrame;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        PicoDao dao=new PicoDao();
+        /*PicoDao dao=new PicoDao();
         MiembrosDao daom=new MiembrosDao();
-        ExpedicionesDao daoe=new ExpedicionesDao();
-        dao.mostrarPicoPorId(1);
-        daom.mostrarMiembroPorId(1);
-        daoe.mostrarExpedicionPorId(1);
+        ExpedicionesDao daoe=new ExpedicionesDao();*/
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ScreenFrame screenFrame = new ScreenFrame();
+                screenFrame.setVisible(true);
+                screenFrame.setLocationRelativeTo(null); // Para centrar la ventana
+                screenFrame.setTitle("Himalayan Travel Boutique");
+                screenFrame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+            }
+        });
         
         try{
             Connection conn=DBConnection.getConnection();

@@ -6,8 +6,8 @@ import java.sql.SQLException;
 public class DBConnection {
      // Datos de conexión (cambiá estos por los tuyos)
     private static final String URL = "jdbc:sqlserver:// 206.189.237.186:14111;databaseName=HimalayaProgra;encrypt=false";///Cambiar datos de user,password
-    private static final String USER =  "rcampostrini";
-    private static final String PASSWORD ="Pancho18";
+    private static final String USER =  "racunia";
+    private static final String PASSWORD ="Cba.654321";
 
     // Objeto conexión único (singleton)
     private static Connection connection = null;

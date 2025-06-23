@@ -20,6 +20,11 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>12.10.0.jre11</version> <!-- Versión compatible con Java 17 -->
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE250</version>
+        </dependency>
     </dependencies>
 
     <!-- REPOSITORIOS EXTRAS -->
