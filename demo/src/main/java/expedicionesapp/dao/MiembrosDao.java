@@ -41,10 +41,35 @@ public class MiembrosDao {
         return miembro; // Devuelve el objeto Expediciones o null si no se encontró
     }
 
+//Mostrar Miembros por expedicion
+       public void showMembersByExpedicion(int id_expedicion) {
+         String sql = "SELECT * FROM expedicionxmiembro_vw where id_expedicion= ?"; // Asegúrate que el nombre de la tabla es "Expediciones"
 
-///Aca Iria el mostrar Miembros por idExpedicion.
+         try (Connection conn = DBConnection.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)) {
+             stmt.setInt(1,id_expedicion);
+             ResultSet rs = stmt.executeQuery();
+             boolean encontrado=false;
 
-
+             while(rs.next()) {
+                 encontrado=true;
+                 System.out.println("Expedicion: " + rs.getInt("id_expedicion")); // Asumo PK es 'id'
+                 System.out.println("Miembro: " + rs.getInt("id_miembro"));
+                 System.out.println("Nacionalidad: " + rs.getString("nacionalidad"));
+                 System.out.println("Nombre: " + rs.getString("nombre"));
+                 System.out.println("Apellido"+rs.getString("apellido"));
+                 System.out.println("Sexo: " + rs.getString("sexo"));
+                 System.out.println("Lider " + rs.getInt("es_lider"));
+                 System.out.println("Staff " + rs.getInt("es_staff")); // Usar getDate() si es DATE
+                 System.out.println("Año de Nacimiento " + rs.getInt("año_nacimiento"));
+                 System.out.println("Fallecido " + rs.getInt("fallecido"));
+         }
+             if(!encontrado){
+                 System.out.println("no se encontro ningun miembro para la expedicion"+id_expedicion);
+             }
+         }catch (SQLException e) {
+             System.err.println("Error al mostrar la expedicion: " + e.getMessage());
+         }
+     }
     // 2. Insertar un nuevo miembro
     public boolean insertMember(Miembros miembro) {
         String sql = """
