@@ -44,13 +44,6 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         expedicionesTableModel = new ExpedicionesTableModel(expedicionesDao.getAllExpeditions());
         expedicionesTable.setModel(expedicionesTableModel); // <-- Aquí asocias el modelo a tu JTable
         
-       nuevaExpedicionBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                crearNuevaExpedicion();
-            }
-        });
-        
         expedicionesTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent event) {
@@ -68,71 +61,137 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
             }
         });
         
-        nuevaExpedicionBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                crearNuevaExpedicion();
-            }
-        });
-        
     }
     
-    private void crearNuevaExpedicion() {
-        try {
+        private void crearNuevaExpedicion() {
+            try {
+                // --- Validación de campos obligatorios (NOT NULL en BD) ---
+                // Validar Pico ID
+                if (picoIdTxt.getText().trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "El campo 'Pico ID' no puede estar vacío.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                    return; // Sale del método si falla la validación
+                }
+                int idPico;
+                try {
+                    idPico = Integer.parseInt(picoIdTxt.getText().trim());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "El campo 'Pico ID' debe ser un número entero válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
-            int idPico = Integer.parseInt(picoIdTxt.getText());
-            // Los campos que pueden estar vacíos y no son obligatorios, se pueden manejar con valores por defecto o null
-            int idAccidente = accidenteIdTxt.getText().isEmpty() ? 0 : Integer.parseInt(accidenteIdTxt.getText());
-            float altitud = altitudTxt.getText().isEmpty() ? 0.0f : Float.parseFloat(altitudTxt.getText());
-            int cupos = cuposTxt.getText().isEmpty() ? 0 : Integer.parseInt(cuposTxt.getText());
-            int conteoMortalidad = mortalidadTxt.getText().isEmpty() ? 0 : Integer.parseInt(mortalidadTxt.getText());
+                // Validar Accidente ID (si es NOT NULL y 0 no es un valor válido, o si es FK y 0 no existe)
+                int idAccidente;
+                if (accidenteIdTxt.getText().trim().isEmpty()) {
+                    idAccidente = 0; // O un valor sentinel para luego manejarlo en el DAO o aquí si se permite NULL en BD
+                } else {
+                    try {
+                        idAccidente = Integer.parseInt(accidenteIdTxt.getText().trim());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "El campo 'Accidente ID' debe ser un número entero válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+                
+                // Validar Motivo
+                String motivo = motivoTxt.getText().trim();
+                if (motivo.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "El campo 'Motivo' no puede estar vacío.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
-            // Manejo de la fecha: Asumiendo formato "yyyy-MM-dd"
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date parsedDate = dateFormat.parse(fechaTxt.getText());
-            Date fechaSQL = new Date(parsedDate.getTime()); // Convertir a java.sql.Date
+                // Validar Ruta
+                String ruta = rutaTxt.getText().trim();
+                if (ruta.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "El campo 'Ruta Elegida' no puede estar vacío.", "Error de Validación", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
 
-            String resultado = resultadoTxt.getText();
-            String motivo = motivoTxt.getText();
-            String ruta = rutaTxt.getText();
+                // --- Manejo de campos opcionales (NULL en BD) ---
+                float altitud;
+                if (altitudTxt.getText().trim().isEmpty()) {
+                    altitud = 0.0f; // Asignar 0.0f si el campo está vacío, ya que altitud permite NULL en BD
+                } else {
+                    try {
+                        altitud = Float.parseFloat(altitudTxt.getText().trim());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "El campo 'Altitud' debe ser un número decimal válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
 
-            // **b. Crear un objeto Expediciones con los datos del formulario**
-            Expediciones nuevaExpedicion = new Expediciones();
-            // El ID no se establece aquí porque es auto-incremental en la BD
-            nuevaExpedicion.setIdPico(idPico);
-            nuevaExpedicion.setIdAccidente(idAccidente);
-            nuevaExpedicion.setAltitud(altitud);
-            nuevaExpedicion.setCupos(cupos);
-            nuevaExpedicion.setConteoMortalidad(conteoMortalidad);
-            nuevaExpedicion.setFecha(fechaSQL);
-            nuevaExpedicion.setResultado(resultado);
-            nuevaExpedicion.setMotivo(motivo);
-            nuevaExpedicion.setRuta(ruta);
+                int cupos;
+                if (cuposTxt.getText().trim().isEmpty()) {
+                    cupos = 0; // Asignar 0 si el campo está vacío, ya que cupos permite NULL en BD
+                } else {
+                    try {
+                        cupos = Integer.parseInt(cuposTxt.getText().trim());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "El campo 'Cupos' debe ser un número entero válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
 
-            // **c. Llamar al método insertExpedition de ExpedicionesDao para guardar en la base de datos**
-            boolean insertadoExitosamente = expedicionesDao.insertExpedition(nuevaExpedicion);
+                int conteoMortalidad;
+                if (mortalidadTxt.getText().trim().isEmpty()) {
+                    conteoMortalidad = 0; // Asignar 0 si el campo está vacío, ya que conteo_mortalidad permite NULL en BD
+                } else {
+                    try {
+                        conteoMortalidad = Integer.parseInt(mortalidadTxt.getText().trim());
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(this, "El campo 'Mortalidad' debe ser un número entero válido.", "Error de Formato", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
 
-            if (insertadoExitosamente) {
-                // **d. Actualizar la tabla si la inserción fue exitosa**
-                // La expedición 'nuevaExpedicion' ahora tiene el ID generado por la DB
-                expedicionesTableModel.addExpedicion(nuevaExpedicion);
-                //JOptionPane.showMessageDialog(this, "Expedición creada y añadida a la tabla correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                java.util.Date fechaUtil = null;
+                if (!fechaTxt.getText().trim().isEmpty()) {
+                    try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        dateFormat.setLenient(false); // Importante para que no acepte fechas inválidas como 2023-02-30
+                        fechaUtil = dateFormat.parse(fechaTxt.getText().trim());
+                    } catch (ParseException ex) {
+                        JOptionPane.showMessageDialog(this, "Error en el formato de la fecha. Por favor, use el formato AAAA-MM-DD (ej. 2025-06-23).", "Error de Formato de Fecha", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+                java.sql.Date fechaSQL = (fechaUtil != null) ? new java.sql.Date(fechaUtil.getTime()) : null;
 
-                // **e. Limpiar el formulario para la siguiente entrada (opcional pero recomendado)**
-                limpiarFormulario();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo insertar la expedición en la base de datos.", "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+
+                String resultado = resultadoTxt.getText().trim(); // resultado permite NULL, así que puede ser ""
+
+                //Crear un objeto Expediciones con los datos del formulario
+                Expediciones nuevaExpedicion = new Expediciones();
+                nuevaExpedicion.setIdPico(idPico);
+                nuevaExpedicion.setIdAccidente(idAccidente); 
+                nuevaExpedicion.setAltitud(altitud); 
+                nuevaExpedicion.setCupos(cupos); 
+                nuevaExpedicion.setConteoMortalidad(conteoMortalidad); 
+                nuevaExpedicion.setFecha(fechaSQL); 
+                nuevaExpedicion.setResultado(resultado.isEmpty() ? null : resultado); 
+                nuevaExpedicion.setMotivo(motivo); 
+                nuevaExpedicion.setRuta(ruta); 
+
+                //Llamar al método insertExpedition de ExpedicionesDao para guardar en la base de datos
+                boolean insertadoExitosamente = expedicionesDao.insertExpedition(nuevaExpedicion);
+
+                if (insertadoExitosamente) {
+                    //Actualizar la tabla si la inserción fue exitosa
+                    expedicionesTableModel.setExpediciones(expedicionesDao.getAllExpeditions());
+                    expedicionesTableModel.fireTableDataChanged(); // Notifica a la tabla que los datos han cambiado
+                    JOptionPane.showMessageDialog(this, "Expedición creada y añadida a la tabla correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                    //Limpiar el formulario para la siguiente entrada 
+                    limpiarFormulario();
+                } else {
+                    // El mensaje de error ya se imprime en el DAO, aquí solo mostramos el general
+                    JOptionPane.showMessageDialog(this, "No se pudo insertar la expedición en la base de datos. Verifique los datos ingresados.", "Error de Base de Datos", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (Exception ex) { // Captura cualquier otra excepción inesperada, como NumberFormatException
+                JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al crear la expedición: " + ex.getMessage(), "Error Inesperado", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace(); // Para depuración, imprime la pila de llamadas en la consola de NetBeans
             }
-
-        }catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Error en el formato de la fecha. Por favor, use el formato AAAA-MM-DD (ej. 2025-06-23).", "Error de Formato de Fecha", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace(); // Para depuración
-        } catch (Exception ex) {
-            // Captura cualquier otra excepción inesperada
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado al crear la expedición: " + ex.getMessage(), "Error Inesperado", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace(); // Para depuración
         }
-    }
     
     private void limpiarFormulario() {
         picoIdTxt.setText("");
@@ -468,11 +527,19 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cambiarResultadoBtnActionPerformed
 
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
-        // TODO add your handling code here:
+        // Crea una instancia de ScreenFrame
+        ScreenFrame screenFrame = new ScreenFrame();
+
+        // Hace visible ScreenFrame
+        screenFrame.setVisible(true);
+
+        // Cierra la ventana actual
+        this.dispose(); // 'this' se refiere al JFrame actual
     }//GEN-LAST:event_volverBtnActionPerformed
 
     private void nuevaExpedicionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevaExpedicionBtnActionPerformed
         // TODO add your handling code here:
+        crearNuevaExpedicion();
     }//GEN-LAST:event_nuevaExpedicionBtnActionPerformed
 
     /**
