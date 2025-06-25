@@ -567,7 +567,117 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_picoIdTxtActionPerformed
 
     private void cambiarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarResultadoBtnActionPerformed
-        // TODO add your handling code here:
+     String inputId = JOptionPane.showInputDialog(
+        this,
+        "Ingrese el ID de la expedición a modificar:",
+        "Modificar Expedición",
+        JOptionPane.QUESTION_MESSAGE
+    );
+    if (inputId == null || inputId.trim().isEmpty()) return;
+
+    int idExpedicion;
+    try {
+        idExpedicion = Integer.parseInt(inputId.trim());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "ID inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    Expediciones expSel = expedicionesDao.getExpeditionById(idExpedicion);
+    if (expSel == null) {
+        JOptionPane.showMessageDialog(this,
+            "No se encontró ninguna expedición con ese ID.",
+            "Sin Resultados", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    String[] columnas = {
+        "ID Pico", "ID Accidente", "Altitud", "Cupos",
+        "Mortalidad", "Fecha (yyyy-MM-dd)", "Resultado", "Motivo", "Ruta Elegida"
+    };
+
+    Object[][] datos = {{
+        expSel.getIdPico(),
+        expSel.getIdAccidente(),
+        expSel.getAltitud(),
+        expSel.getCupos(),
+        expSel.getConteoMortalidad(),
+        expSel.getFecha() != null ? new SimpleDateFormat("yyyy-MM-dd").format(expSel.getFecha()) : "",
+        expSel.getResultado() != null ? expSel.getResultado() : "",
+        expSel.getMotivo(),
+        expSel.getRuta()
+    }};
+
+    JTable tabla = new JTable(datos, columnas);
+    JScrollPane scroll = new JScrollPane(tabla);
+    scroll.setPreferredSize(new Dimension(750, 75));
+
+    int opcion = JOptionPane.showConfirmDialog(
+        this, scroll,
+        "Editar Expedición ID " + idExpedicion,
+        JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE
+    );
+    if (opcion != JOptionPane.OK_OPTION) return;
+
+    try {
+        Expediciones nueva = new Expediciones();
+        nueva.setId(idExpedicion); // 🔒 El ID no se modifica
+
+        nueva.setIdPico(Integer.parseInt(tabla.getValueAt(0, 0).toString().trim()));
+
+        String acc = tabla.getValueAt(0, 1).toString().trim();
+        nueva.setIdAccidente(acc.isEmpty() ? null : Integer.parseInt(acc));
+
+        String alt = tabla.getValueAt(0, 2).toString().trim();
+        nueva.setAltitud(alt.isEmpty() ? null : Float.parseFloat(alt));
+
+        String cup = tabla.getValueAt(0, 3).toString().trim();
+        nueva.setCupos(cup.isEmpty() ? null : Integer.parseInt(cup));
+
+        String mort = tabla.getValueAt(0, 4).toString().trim();
+        nueva.setConteoMortalidad(mort.isEmpty() ? null : Integer.parseInt(mort));
+
+        String fechaTxt = tabla.getValueAt(0, 5).toString().trim();
+        if (fechaTxt.isEmpty()) {
+            nueva.setFecha(null);
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setLenient(false);
+            Date parsed = sdf.parse(fechaTxt);
+            nueva.setFecha(parsed);
+        }
+
+        String resultado = tabla.getValueAt(0, 6).toString().trim();
+        nueva.setResultado(resultado.isEmpty() ? null : resultado);
+
+        String motivo = tabla.getValueAt(0, 7).toString().trim();
+        if (motivo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "El campo 'Motivo' no puede estar vacío.", "Validación", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        nueva.setMotivo(motivo);
+
+        String ruta = tabla.getValueAt(0, 8).toString().trim();
+        nueva.setRuta(ruta);
+        
+        boolean ok = expedicionesDao.modifyExpedition(nueva);
+        if (ok) {
+            expedicionesTableModel.setExpediciones(expedicionesDao.getAllExpeditions());
+            tabla.repaint();
+            JOptionPane.showMessageDialog(this,
+                "Expedición actualizada correctamente.",
+                "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo actualizar la expedición.",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (NumberFormatException | ParseException ex) {
+        JOptionPane.showMessageDialog(this,
+            "Error en los datos ingresados: " + ex.getMessage(),
+            "Error de Formato", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_cambiarResultadoBtnActionPerformed
 
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
