@@ -224,5 +224,24 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
         }
         return count;
     }
+    public boolean tieneMiembrosAsociados(int idExpedicion) {
+    String sql = "SELECT COUNT(*) FROM miembros_expediciones WHERE id_expedicion = ?";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, idExpedicion);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+
+    } catch (SQLException e) {
+        System.err.println("Error al verificar miembros asociados: " + e.getMessage());
+    }
+
+    return false;
+}
 
 }

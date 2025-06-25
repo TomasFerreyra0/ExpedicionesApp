@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package expedicionesapp.ui;
 
 import expedicionesapp.dao.ExpedicionesDao; 
@@ -17,7 +13,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.JTextField; 
 import java.text.SimpleDateFormat; 
 import java.util.Date;
-import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -333,7 +328,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         rutaTxt = new javax.swing.JTextField();
         motivoTxt = new javax.swing.JTextField();
         Miembros = new javax.swing.JButton();
-        borrarBtn1 = new javax.swing.JButton();
+        BorrarBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -418,10 +413,10 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
             }
         });
 
-        borrarBtn1.setText("Borrar");
-        borrarBtn1.addActionListener(new java.awt.event.ActionListener() {
+        BorrarBtn1.setText("Borrar");
+        BorrarBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                borrarBtn1ActionPerformed(evt);
+                BorrarBtn1ActionPerformed(evt);
             }
         });
 
@@ -438,7 +433,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rutaElegidaLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                                 .addComponent(rutaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,9 +463,9 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                         .addComponent(nuevaExpedicionBtn)
                         .addGap(18, 18, 18)
                         .addComponent(volverBtn)
-                        .addGap(11, 11, 11)
-                        .addComponent(borrarBtn1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BorrarBtn1)
+                        .addGap(17, 17, 17)
                         .addComponent(cambiarResultadoBtn)
                         .addGap(21, 21, 21)
                         .addComponent(Miembros)
@@ -530,7 +525,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                     .addComponent(volverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cambiarResultadoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Miembros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(borrarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BorrarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75))
         );
 
@@ -574,10 +569,37 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         crearNuevaExpedicion();
     }//GEN-LAST:event_nuevaExpedicionBtnActionPerformed
 
-    private void borrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_borrarBtn1ActionPerformed
+private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {
+    String input = JOptionPane.showInputDialog(this, "Ingrese el ID de la expedición a eliminar:");
+    if (input != null && !input.trim().isEmpty()) {
+        try {
+            int idExpedicion = Integer.parseInt(input.trim());
 
+            if (miembrosDao.tieneMiembrosAsociados(idExpedicion)) {
+                JOptionPane.showMessageDialog(this,
+                    "No se puede eliminar la expedición con ID " + idExpedicion +
+                    " porque tiene miembros asociados.",
+                    "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+                boolean eliminada = expedicionesDao.deleteExpedition(idExpedicion);
+                if (eliminada) {
+                    JOptionPane.showMessageDialog(this,
+                        "Expedición eliminada correctamente.",
+                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                        "No se encontró la expedición con ese ID.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                "El ID ingresado no es válido.",
+                "Error de formato", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
 private void MiembrosActionPerformed(java.awt.event.ActionEvent evt) {
     String input = JOptionPane.showInputDialog(this, "Ingrese el ID de la expedición:", "Buscar Miembros", JOptionPane.QUESTION_MESSAGE);
 
@@ -649,12 +671,12 @@ private void MiembrosActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BorrarBtn1;
     private javax.swing.JButton Miembros;
     private javax.swing.JLabel accidenteIdLabel;
     private javax.swing.JTextField accidenteIdTxt;
     private javax.swing.JLabel altitudLabel;
     private javax.swing.JTextField altitudTxt;
-    private javax.swing.JButton borrarBtn1;
     private javax.swing.JButton cambiarResultadoBtn;
     private javax.swing.JLabel cuposLabel;
     private javax.swing.JTextField cuposTxt;
