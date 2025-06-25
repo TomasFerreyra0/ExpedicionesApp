@@ -3,6 +3,7 @@ package expedicionesapp.ui;
 import expedicionesapp.dao.ExpedicionesDao; 
 import expedicionesapp.dao.MiembrosDao;
 import expedicionesapp.dao.PicoDao;
+import expedicionesapp.model.Pico;
 import expedicionesapp.model.Expediciones; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +33,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     private ExpedicionesDao expedicionesDao;
     private ExpedicionesTableModel expedicionesTableModel;
     private MiembrosDao miembrosDao;
+    private PicoDao picosdao;
 
     
     
@@ -43,6 +45,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         initComponents();
         miembrosDao=new MiembrosDao();
         expedicionesDao = new ExpedicionesDao(); // Inicializa el DAO
+        picosdao=new PicoDao();
         cargarTablaExpediciones(); // Llama al método para cargar la tabla al iniciar la ventana
         
         // 2. Inicializar y configurar el ExpedicionesTableModel para tu JTable
@@ -451,8 +454,8 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                                     .addComponent(BorrarBtn1)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(volverBtn)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(picos)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(picos, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(Miembros)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -584,7 +587,37 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nuevaExpedicionBtnActionPerformed
 
     private void picosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_picosActionPerformed
-        // TODO add your handling code here:
+ List<Pico> picos = picosdao.getAllPeaks();
+
+    if (picos.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No hay picos cargados en la base de datos.", "Sin Resultados", JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+
+    String[] columnas = {"ID", "Localización", "Nombre", "Abierto", "Altura", "Cambio Trekking", "Sin Aprobación", "Estado", "Host", "Restricciones"};
+    Object[][] datos = new Object[picos.size()][columnas.length];
+
+    for (int i = 0; i < picos.size(); i++) {
+        Pico pico = picos.get(i);
+        datos[i][0] = pico.getId();
+        datos[i][1] = pico.getLocalizacion();
+        datos[i][2] = pico.getNombrePico();
+        datos[i][3] =( pico.getAbierto()==1)? "si" : "no";
+        datos[i][4] = pico.getAltura();
+        datos[i][5] = (pico.getCambio_trekking()==1)? "si" : "no";
+        datos[i][6] = (pico.getSin_aprobacion()==1)? "si" : "no";
+        datos[i][7] = pico.getEstado();
+        datos[i][8] = (pico.getHost()==1)? "Nepal" : "Otro";
+        datos[i][9] = pico.getRestricciones();
+    }
+
+    JTable tabla = new JTable(datos, columnas);
+    JScrollPane scrollPane = new JScrollPane(tabla);
+    scrollPane.setPreferredSize(new Dimension(800, 300));
+
+    JOptionPane.showMessageDialog(this, scrollPane, "Todos los Picos Registrados", JOptionPane.INFORMATION_MESSAGE);
+
+
     }//GEN-LAST:event_picosActionPerformed
 
 private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {
