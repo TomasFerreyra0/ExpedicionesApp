@@ -44,7 +44,7 @@ public class PicoDao {
        // Modifica los campos de estado del pico
    public void modifyPeak(Pico pico) {
         String sql = """
-                UPDATE Picos SET
+                UPDATE Pico SET
                     localizacion = ?,
                     nombrePico = ?,
                     abierto = ?,
@@ -113,7 +113,45 @@ public class PicoDao {
             return encontrado;
         }
    }
-   
+   public boolean insertPeak(Pico pico) {
+    String sql = """
+        INSERT INTO Pico (localizacion, nombrePico, abierto, altura, cambio_trekking, sin_aprobacion, estado, host, restricciones)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """;
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+        stmt.setString(1, pico.getLocalizacion());
+        stmt.setString(2, pico.getNombrePico());
+        stmt.setInt(3, pico.getAbierto());
+        stmt.setFloat(4, pico.getAltura());
+        stmt.setInt(5, pico.getCambio_trekking());
+        stmt.setInt(6, pico.getSin_aprobacion());
+        stmt.setString(7, pico.getEstado());
+        stmt.setInt(8, pico.getHost());
+        stmt.setInt(9, pico.getRestricciones());
+
+        int rows = stmt.executeUpdate();
+        if (rows > 0) {
+            try (ResultSet keys = stmt.getGeneratedKeys()) {
+                if (keys.next()) {
+                    pico.setId(keys.getInt(1));
+                }
+            }
+            System.out.println("Pico insertado correctamente con ID: " + pico.getId());
+            return true;
+        } else {
+            System.out.println("No se pudo insertar el pico.");
+            return false;
+        }
+
+    } catch (SQLException e) {
+        System.err.println("Error al insertar el pico: " + e.getMessage());
+        return false;
+    }
+}
+
    
    // Obtiene una lista de todos los picos
 public List<Pico> getAllPeaks() {

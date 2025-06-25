@@ -697,39 +697,11 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_nuevaExpedicionBtnActionPerformed
 
     private void picosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_picosActionPerformed
- List<Pico> picos = picosdao.getAllPeaks();
-
-    if (picos.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "No hay picos cargados en la base de datos.", "Sin Resultados", JOptionPane.INFORMATION_MESSAGE);
-        return;
-    }
-
-    String[] columnas = {"ID", "Localización", "Nombre", "Abierto", "Altura", "Cambio Trekking", "Sin Aprobación", "Estado", "Host", "Restricciones"};
-    Object[][] datos = new Object[picos.size()][columnas.length];
-
-    for (int i = 0; i < picos.size(); i++) {
-        Pico pico = picos.get(i);
-        datos[i][0] = pico.getId();
-        datos[i][1] = pico.getLocalizacion();
-        datos[i][2] = pico.getNombrePico();
-        datos[i][3] =( pico.getAbierto()==1)? "si" : "no";
-        datos[i][4] = pico.getAltura();
-        datos[i][5] = (pico.getCambio_trekking()==1)? "si" : "no";
-        datos[i][6] = (pico.getSin_aprobacion()==1)? "si" : "no";
-        datos[i][7] = pico.getEstado();
-        datos[i][8] = (pico.getHost()==1)? "Nepal" : "Otro";
-        datos[i][9] = pico.getRestricciones();
-    }
-
-    JTable tabla = new JTable(datos, columnas);
-    JScrollPane scrollPane = new JScrollPane(tabla);
-    scrollPane.setPreferredSize(new Dimension(800, 300));
-
-    JOptionPane.showMessageDialog(this, scrollPane, "Todos los Picos Registrados", JOptionPane.INFORMATION_MESSAGE);
-
-
+        PicoFrame picoFrame = new PicoFrame();
+        picoFrame.setVisible(true);
+        picoFrame.setLocationRelativeTo(this);
     }//GEN-LAST:event_picosActionPerformed
-
+     
 private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {
     String input = JOptionPane.showInputDialog(this, "Ingrese el ID de la expedición a eliminar:");
     if (input != null && !input.trim().isEmpty()) {
