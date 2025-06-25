@@ -5,6 +5,7 @@
 package expedicionesapp.ui;
 
 import expedicionesapp.dao.ExpedicionesDao; 
+import expedicionesapp.dao.MiembrosDao;
 import expedicionesapp.model.Expediciones; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,12 @@ import javax.swing.JTextField;
 import java.text.SimpleDateFormat; 
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.Dimension;
+import javax.swing.JTable;
+
 
 /**
  *
@@ -28,6 +35,8 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     // Declara una instancia de ExpedicionesDao
     private ExpedicionesDao expedicionesDao;
     private ExpedicionesTableModel expedicionesTableModel;
+    private MiembrosDao miembrosDao;
+
     
     
     
@@ -36,6 +45,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
      */
     public ExpedicionesFrame() {
         initComponents();
+        miembrosDao=new MiembrosDao();
         expedicionesDao = new ExpedicionesDao(); // Inicializa el DAO
         cargarTablaExpediciones(); // Llama al método para cargar la tabla al iniciar la ventana
         
@@ -322,6 +332,8 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         resultadoTxt = new javax.swing.JTextField();
         rutaTxt = new javax.swing.JTextField();
         motivoTxt = new javax.swing.JTextField();
+        Miembros = new javax.swing.JButton();
+        borrarBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -340,7 +352,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
             }
         });
 
-        cambiarResultadoBtn.setText("Cambiar Resultado");
+        cambiarResultadoBtn.setText("Cambiar Expedicion");
         cambiarResultadoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cambiarResultadoBtnActionPerformed(evt);
@@ -399,6 +411,20 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
             }
         });
 
+        Miembros.setText("Miembros");
+        Miembros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MiembrosActionPerformed(evt);
+            }
+        });
+
+        borrarBtn1.setText("Borrar");
+        borrarBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarBtn1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -407,22 +433,12 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(expedicionesProcesoLabel)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(nuevaExpedicionBtn)
-                                .addGap(58, 58, 58)
-                                .addComponent(volverBtn)
-                                .addGap(55, 55, 55)
-                                .addComponent(cambiarResultadoBtn))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(rutaElegidaLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(rutaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,7 +463,21 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(resultadoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(motivoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(fechaTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nuevaExpedicionBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(volverBtn)
+                        .addGap(11, 11, 11)
+                        .addComponent(borrarBtn1)
+                        .addGap(18, 18, 18)
+                        .addComponent(cambiarResultadoBtn)
+                        .addGap(21, 21, 21)
+                        .addComponent(Miembros)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(expedicionesProcesoLabel)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,12 +524,14 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                             .addComponent(rutaElegidaLabel)
                             .addComponent(rutaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(2, 2, 2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nuevaExpedicionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(volverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cambiarResultadoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                    .addComponent(cambiarResultadoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Miembros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 740, 420));
@@ -542,6 +574,43 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         crearNuevaExpedicion();
     }//GEN-LAST:event_nuevaExpedicionBtnActionPerformed
 
+    private void borrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarBtn1ActionPerformed
+
+private void MiembrosActionPerformed(java.awt.event.ActionEvent evt) {
+    String input = JOptionPane.showInputDialog(this, "Ingrese el ID de la expedición:", "Buscar Miembros", JOptionPane.QUESTION_MESSAGE);
+
+    if (input != null && !input.trim().isEmpty()) {
+        try {
+            int idExpedicion = Integer.parseInt(input.trim());
+
+            List<Object[]> miembros = miembrosDao.obtenerMiembrosPorExpedicion(idExpedicion);
+
+            if (miembros.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se encontraron miembros para la expedición ID " + idExpedicion, "Sin Resultados", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            String[] columnas = {"ID", "Nombre", "Apellido", "Nacionalidad", "Sexo", "Líder", "Staff", "Nacimiento", "Fallecido"};
+            Object[][] datos = new Object[miembros.size()][columnas.length];
+
+            for (int i = 0; i < miembros.size(); i++) {
+                datos[i] = miembros.get(i);
+            }
+
+            JTable tabla = new JTable(datos, columnas);
+            JScrollPane scrollPane = new JScrollPane(tabla);
+            scrollPane.setPreferredSize(new Dimension(700, 300));
+
+            JOptionPane.showMessageDialog(this, scrollPane, "Miembros de la Expedición " + idExpedicion, JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
+
     /**
      * @param args the command line arguments
      */
@@ -580,10 +649,12 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Miembros;
     private javax.swing.JLabel accidenteIdLabel;
     private javax.swing.JTextField accidenteIdTxt;
     private javax.swing.JLabel altitudLabel;
     private javax.swing.JTextField altitudTxt;
+    private javax.swing.JButton borrarBtn1;
     private javax.swing.JButton cambiarResultadoBtn;
     private javax.swing.JLabel cuposLabel;
     private javax.swing.JTextField cuposTxt;

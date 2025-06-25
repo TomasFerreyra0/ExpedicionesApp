@@ -1,6 +1,9 @@
 package expedicionesapp.dao;
 
-
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import java.awt.Dimension;
 import expedicionesapp.util.DBConnection;
 import expedicionesapp.model.Miembros;
 import java.sql.Connection;
@@ -42,34 +45,40 @@ public class MiembrosDao {
     }
 
 //Mostrar Miembros por expedicion
-       public void showMembersByExpedicion(int id_expedicion) {
-         String sql = "SELECT * FROM expedicionxmiembro_vw where id_expedicion= ?"; // Asegúrate que el nombre de la tabla es "Expediciones"
+public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
+    String sql = "SELECT * FROM expedicionxmiembro_vw WHERE id_expedicion = ?";
+    List<Object[]> datos = new ArrayList<>();
 
-         try (Connection conn = DBConnection.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)) {
-             stmt.setInt(1,id_expedicion);
-             ResultSet rs = stmt.executeQuery();
-             boolean encontrado=false;
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-             while(rs.next()) {
-                 encontrado=true;
-                 System.out.println("Expedicion: " + rs.getInt("id_expedicion")); // Asumo PK es 'id'
-                 System.out.println("Miembro: " + rs.getInt("id_miembro"));
-                 System.out.println("Nacionalidad: " + rs.getString("nacionalidad"));
-                 System.out.println("Nombre: " + rs.getString("nombre"));
-                 System.out.println("Apellido"+rs.getString("apellido"));
-                 System.out.println("Sexo: " + rs.getString("sexo"));
-                 System.out.println("Lider " + rs.getInt("es_lider"));
-                 System.out.println("Staff " + rs.getInt("es_staff")); // Usar getDate() si es DATE
-                 System.out.println("Año de Nacimiento " + rs.getInt("año_nacimiento"));
-                 System.out.println("Fallecido " + rs.getInt("fallecido"));
-         }
-             if(!encontrado){
-                 System.out.println("no se encontro ningun miembro para la expedicion"+id_expedicion);
-             }
-         }catch (SQLException e) {
-             System.err.println("Error al mostrar la expedicion: " + e.getMessage());
-         }
-     }
+        stmt.setInt(1, idExpedicion);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Object[] fila = new Object[]{
+                rs.getInt("id_miembros"),
+                rs.getString("nombre"),
+                rs.getString("apellido"),
+                rs.getString("nacionalidad"),
+                rs.getString("sexo"),
+                rs.getInt("es_lider") == 1 ? "Sí" : "No",
+                rs.getInt("es_staff") == 1 ? "Sí" : "No",
+                rs.getInt("año_nacimiento"),
+                rs.getInt("fallecido") == 1 ? "Sí" : "No"
+            };
+            datos.add(fila);
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al consultar miembros: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    return datos;
+}
+
+
+
     // 2. Insertar un nuevo miembro
     public boolean insertMember(Miembros miembro) {
         String sql = """

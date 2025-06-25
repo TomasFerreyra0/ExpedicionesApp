@@ -38,26 +38,13 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="expedicionesProcesoLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="nuevaExpedicionBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Component id="volverBtn" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="cambiarResultadoBtn" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jScrollPane1" min="-2" pref="545" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jScrollPane1" min="-2" pref="545" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="rutaElegidaLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="rutaTxt" min="-2" pref="70" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
@@ -91,6 +78,22 @@
                                   </Group>
                               </Group>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="nuevaExpedicionBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="volverBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                          <Component id="borrarBtn1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cambiarResultadoBtn" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="Miembros" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="expedicionesProcesoLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="596" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -153,13 +156,15 @@
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="nuevaExpedicionBtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="volverBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="cambiarResultadoBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="Miembros" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="borrarBtn1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -183,7 +188,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="cambiarResultadoBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cambiar Resultado"/>
+            <Property name="text" type="java.lang.String" value="Cambiar Expedicion"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cambiarResultadoBtnActionPerformed"/>
@@ -290,6 +295,22 @@
         <Component class="javax.swing.JTextField" name="rutaTxt">
         </Component>
         <Component class="javax.swing.JTextField" name="motivoTxt">
+        </Component>
+        <Component class="javax.swing.JButton" name="Miembros">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Miembros"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MiembrosActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="borrarBtn1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Borrar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="borrarBtn1ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

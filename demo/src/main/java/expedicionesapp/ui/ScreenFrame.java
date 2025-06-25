@@ -29,15 +29,12 @@ public class ScreenFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         expedicionesButton = new javax.swing.JButton();
-        newExpedicionButton = new javax.swing.JButton();
         bannerLabel = new javax.swing.JLabel();
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        logoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\GitHub\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\logo.png")); // NOI18N
         jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 300, 250));
 
         expedicionesButton.setBackground(new java.awt.Color(60, 93, 119));
@@ -52,16 +49,8 @@ public class ScreenFrame extends javax.swing.JFrame {
                 expedicionesButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 179, 52));
-
-        newExpedicionButton.setBackground(new java.awt.Color(60, 93, 119));
-        newExpedicionButton.setText("Nueva Expedicion");
-        jPanel1.add(newExpedicionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 179, 52));
-
-        bannerLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\GitHub\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\banner.png")); // NOI18N
+        jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 179, 52));
         jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
-
-        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Documents\\GitHub\\ExpedicionesApp\\demo\\src\\main\\java\\expedicionesapp\\Img\\background.png")); // NOI18N
         jPanel1.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,6 +130,5 @@ public class ScreenFrame extends javax.swing.JFrame {
     private javax.swing.JButton expedicionesButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logoLabel;
-    private javax.swing.JButton newExpedicionButton;
     // End of variables declaration//GEN-END:variables
 }
