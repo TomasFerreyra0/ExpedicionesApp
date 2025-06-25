@@ -13,7 +13,7 @@ public class Miembros_expedicionesDAO {
     public boolean unirMiembrosExpediciones(Miembros_expediciones expedicion) {
         //Prepara el codigo y le pone null al stmt para no crearlo en el foreach
         String sql = """
-            INSERT INTO Miembros_expediciones (id_Expedicion, id_accidente)
+            INSERT INTO Miembros_expediciones (id_Expedicion, id_miembros)
             VALUES (?, ?)
             """; 
         PreparedStatement stmt = null;
