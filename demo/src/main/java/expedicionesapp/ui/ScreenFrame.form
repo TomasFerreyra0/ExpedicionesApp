@@ -43,9 +43,14 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="logoLabel">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/expedicionesapp/Img/HIMALAYA-LOGO.png"/>
+            </Property>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="120" width="300" height="250"/>
+              <AbsoluteConstraints x="360" y="150" width="260" height="170"/>
             </Constraint>
           </Constraints>
         </Component>

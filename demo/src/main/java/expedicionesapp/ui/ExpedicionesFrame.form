@@ -28,7 +28,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="40" y="30" width="740" height="420"/>
+          <AbsoluteConstraints x="40" y="30" width="750" height="420"/>
         </Constraint>
       </Constraints>
 
@@ -40,38 +40,28 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="expedicionesProcesoLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="545" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
+                                  <Component id="volverBtn" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="nuevaExpedicionBtn" min="-2" pref="130" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="cambiarResultadoBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="BorrarBtn1" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace pref="201" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="volverBtn" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="picos" min="-2" pref="81" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="miembros" max="32767" attributes="0"/>
-                                      </Group>
+                                  <Component id="BorrarBtn1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="picos" max="32767" attributes="0"/>
+                                      <Component id="miembros" pref="118" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <Component id="jScrollPane1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="rutaElegidaLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="42" max="32767" attributes="0"/>
-                                  <Component id="rutaTxt" min="-2" pref="70" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="accidenteIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -82,12 +72,17 @@
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="picoIdTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <Component id="accidenteIdTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <Component id="altitudTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <Component id="cuposTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Component id="mortalidadTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="cuposTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="altitudTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="accidenteIdTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="picoIdTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                   </Group>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="rutaElegidaLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="rutaTxt" min="-2" pref="70" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -95,16 +90,17 @@
                                       <Component id="motivoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="fechaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="94" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="resultadoTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Component id="motivoTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Component id="resultadoTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                       <Component id="fechaTxt" alignment="1" min="-2" pref="70" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -168,14 +164,14 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="nuevaExpedicionBtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="volverBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="picos" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="cambiarResultadoBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="miembros" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="BorrarBtn1" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="volverBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="BorrarBtn1" min="-2" pref="39" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="miembros" min="-2" pref="39" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -298,6 +294,9 @@
         <Component class="javax.swing.JTextField" name="cuposTxt">
         </Component>
         <Component class="javax.swing.JTextField" name="mortalidadTxt">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mortalidadTxtActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="fechaTxt">
         </Component>

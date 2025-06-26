@@ -23,7 +23,9 @@ public class ScreenFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 300, 250));
+
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/expedicionesapp/Img/HIMALAYA-LOGO.png"))); // NOI18N
+        jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 260, 170));
 
         expedicionesButton.setBackground(new java.awt.Color(60, 93, 119));
         expedicionesButton.setText("Iniciar Programa");
