@@ -1,6 +1,10 @@
 
 package expedicionesapp.ui;
 
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.SwingWorker;
+
 
 public class ScreenFrame extends javax.swing.JFrame {
     public ScreenFrame() {
@@ -33,7 +37,7 @@ public class ScreenFrame extends javax.swing.JFrame {
                 expedicionesButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 179, 52));
+        jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 179, 52));
         jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
         jPanel1.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
@@ -57,20 +61,47 @@ public class ScreenFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_expedicionesButtonActionPerformed
 
+    private JDialog mostrarDialogoCarga(String mensaje) {
+        final JDialog dialogo = new JDialog(this, true);
+        dialogo.setUndecorated(true);
+        dialogo.getContentPane().add(new JLabel(mensaje, javax.swing.SwingConstants.CENTER));
+        dialogo.setSize(200, 80);
+        dialogo.setLocationRelativeTo(this);
+        dialogo.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        return dialogo;
+}
+
+
     private void expedicionesButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expedicionesButtonMouseClicked
-        // TODO add your handling code here:
-        // 1. Ocultar la ventana actual (ScreenFrame)
-        this.setVisible(false);
-        
+ // 1. Crear el diálogo antes
+    JDialog dialogo = mostrarDialogoCarga("Iniciando programa...");
 
-        // 2. Crear una nueva instancia del JFrame ExpedicionesFrame
-        ExpedicionesFrame expedicionesFrame = new ExpedicionesFrame();
+    // 2. Mostrar el diálogo en otro hilo
+    Thread hiloDialogo = new Thread(() -> dialogo.setVisible(true));
+    hiloDialogo.start();
 
-        // 3. Hacer visible el nuevo JFrame
-        expedicionesFrame.setVisible(true);
-
-        // Opcional: Centrar la nueva ventana en la pantalla
-        expedicionesFrame.setLocationRelativeTo(null);
+    // 3. Ejecutar carga con retardo mínimo
+    SwingWorker<Void, Void> worker = new SwingWorker<>() {
+        @Override
+        protected Void doInBackground() {
+            try {
+                // Simular que tarda un poquito (solo visual, podés ajustar)
+                Thread.sleep(800);
+            } catch (InterruptedException e) {
+                // Ignorar
+            }
+            return null;
+        }
+        @Override
+        protected void done() {
+            dialogo.dispose();
+            ExpedicionesFrame expedicionesFrame = new ExpedicionesFrame();
+            expedicionesFrame.setLocationRelativeTo(null);
+            expedicionesFrame.setVisible(true);
+            ScreenFrame.this.dispose();
+        }
+    };
+    worker.execute();
     }//GEN-LAST:event_expedicionesButtonMouseClicked
 
     public static void main(String args[]) {
@@ -104,6 +135,8 @@ public class ScreenFrame extends javax.swing.JFrame {
             }
         });
     }
+private javax.swing.JButton salirBtn;
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;
