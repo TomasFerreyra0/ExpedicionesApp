@@ -37,7 +37,7 @@ public class ScreenFrame extends javax.swing.JFrame {
                 expedicionesButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, 179, 52));
+        jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 179, 52));
         jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
         jPanel1.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
