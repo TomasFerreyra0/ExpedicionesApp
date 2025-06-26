@@ -135,9 +135,6 @@ public class ScreenFrame extends javax.swing.JFrame {
             }
         });
     }
-private javax.swing.JButton salirBtn;
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backgroundLabel;
     private javax.swing.JLabel bannerLabel;
