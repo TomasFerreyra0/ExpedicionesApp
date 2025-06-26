@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class Miembros_expedicionesDAO {
    
-    public boolean unirMiembrosExpediciones(Miembros_expediciones expedicion) {
+    public boolean unirMiembrosExpediciones(Miembros_expediciones expedicion) throws SQLException{
         //Prepara el codigo y le pone null al stmt para no crearlo en el foreach
         String sql = """
             INSERT INTO Miembros_expediciones (id_Expedicion, id_miembros)

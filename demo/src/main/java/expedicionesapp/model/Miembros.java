@@ -56,7 +56,7 @@ public class Miembros {
     }
 
     public void setId(int id_miembro) {
-        this.id = id;
+        this.id = id_miembro;
     }
 
     public String getNacionalidad() {

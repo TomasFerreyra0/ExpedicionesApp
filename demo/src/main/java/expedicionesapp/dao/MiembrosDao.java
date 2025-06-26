@@ -243,5 +243,90 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
 
     return false;
 }
+        //7 Busca si el miembro existe
+    public int miembroYaExiste(Miembros miembro) throws SQLException {
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT id FROM miembros WHERE " +
+                 "nombre = ? AND apellido = ? AND nacionalidad = ? AND sexo = ? " +
+                 "AND es_lider = ? AND es_staff = ? AND año_nacimiento = ? AND fallecido = ?";
 
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, miembro.getNombre());
+        stmt.setString(2, miembro.getApellido());
+        stmt.setString(3, miembro.getNacionalidad());
+        stmt.setString(4, miembro.getSexo());
+        stmt.setInt(5, miembro.getEs_lider());
+        stmt.setInt(6, miembro.getEs_staff());
+        stmt.setInt(7, miembro.getAno_nacimiento());
+        stmt.setInt(8, miembro.getFallecido());
+
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id");//Devuelve el id encontrado
+        }else{
+            return -1;//devuelve-1 porq no encontro nada
+        }
+    }
+    }
+    //8 devuelve el ultimo miembro
+    public Miembros obtenerUltimoMiembro() throws SQLException {
+    Connection conn = DBConnection.getConnection();
+    String sql = "SELECT TOP 1 * FROM Miembros ORDER BY id DESC";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            Miembros mmiembroB = new Miembros();
+            mmiembroB.setId(rs.getInt("id"));
+            mmiembroB.setNombre(rs.getString("nombre"));
+            mmiembroB.setApellido(rs.getString("apellido"));
+            mmiembroB.setNacionalidad(rs.getString("nacionalidad"));
+            mmiembroB.setSexo(rs.getString("sexo"));
+            mmiembroB.setEs_lider(rs.getInt("es_lider"));
+            mmiembroB.setEs_staff(rs.getInt("es_staff"));
+            mmiembroB.setAno_nacimiento(rs.getInt("año_nacimiento"));
+            mmiembroB.setFallecido(rs.getInt("fallecido"));
+            return mmiembroB;
+        }else{return null;}
+    }
+    }
+    //9 inserta miembro pero devolviendo el objeto que inserto
+        public Miembros insertMember2(Miembros miembro) {
+        String sql = """
+            INSERT INTO Miembros (nacionalidad, nombre, apellido, sexo, es_lider, es_staff, año_nacimiento,fallecido)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """; 
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, miembro.getNacionalidad());
+            stmt.setString(2, miembro.getNombre());
+            stmt.setString(3, miembro.getApellido());
+            stmt.setString(4, miembro.getSexo());
+            stmt.setInt(5, miembro.getEs_lider());
+            stmt.setInt(6, miembro.getEs_staff());
+            stmt.setInt(7, miembro.getAno_nacimiento());
+            stmt.setInt(8,miembro.getFallecido());
+            
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Recuperar el ID generado si es auto-incremental
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        miembro.setId(generatedKeys.getInt(1));
+                    }
+                }
+                System.out.println("Expedición insertada correctamente con ID: " + miembro.getId());
+                return miembro;
+            } else {
+                System.out.println("No se pudo insertar la expedición.");
+                return null ;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al insertar la expedición: " + e.getMessage());
+            return null;
+        }
+    }
 }
