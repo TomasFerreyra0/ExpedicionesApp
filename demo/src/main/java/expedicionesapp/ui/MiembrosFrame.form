@@ -366,7 +366,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="buscarMiembro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Bucar miembros exp."/>
+            <Property name="text" type="java.lang.String" value="Buscar miembros exp."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarMiembroActionPerformed"/>

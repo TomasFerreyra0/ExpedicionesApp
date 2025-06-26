@@ -172,7 +172,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
             }
         });
 
-        buscarMiembro.setText("Bucar miembros exp.");
+        buscarMiembro.setText("Buscar miembros exp.");
         buscarMiembro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarMiembroActionPerformed(evt);
