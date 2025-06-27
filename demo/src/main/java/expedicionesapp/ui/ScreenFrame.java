@@ -21,11 +21,13 @@ public class ScreenFrame extends javax.swing.JFrame {
         backgroundLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/expedicionesapp/Img/HIMALAYA-LOGO.png"))); // NOI18N
-        jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 260, 170));
+        logoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\logo.png")); // NOI18N
+        jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 260, 170));
 
         expedicionesButton.setBackground(new java.awt.Color(60, 93, 119));
         expedicionesButton.setText("Iniciar Programa");
@@ -40,16 +42,18 @@ public class ScreenFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 179, 52));
-        jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
+
+        bannerLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\banner.png")); // NOI18N
+        jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+
+        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
         jPanel1.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

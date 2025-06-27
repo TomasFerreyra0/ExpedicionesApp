@@ -16,7 +16,7 @@ public class PicoFrame extends javax.swing.JFrame {
 
     public PicoFrame() {
         setTitle("Listado de Picos");
-        setSize(1000, 600);
+        setSize(800, 500);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         dao = new PicoDao();

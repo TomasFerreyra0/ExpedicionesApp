@@ -12,6 +12,8 @@ import expedicionesapp.model.Expediciones;
 import expedicionesapp.model.Miembros_expediciones;
 import java.awt.Dimension;
 import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 public class MiembrosFrame extends javax.swing.JFrame {
@@ -39,7 +41,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
 
         nuevaExpedicionBtn1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        nuevoMiembro = new javax.swing.JButton();
+        nuevoMiembroBtn = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         MiembrosTable = new javax.swing.JTable();
@@ -60,22 +62,30 @@ public class MiembrosFrame extends javax.swing.JFrame {
         staftxt = new javax.swing.JTextField();
         Nacimientotxt = new javax.swing.JTextField();
         fallecidoTxt = new javax.swing.JTextField();
-        Miembros = new javax.swing.JButton();
-        BorrarBtn1 = new javax.swing.JButton();
-        BorrarMiembrobutton = new javax.swing.JButton();
-        buscarMiembro = new javax.swing.JButton();
+        expedicionesBtn = new javax.swing.JButton();
+        borrarFormBtn = new javax.swing.JButton();
+        borrarMiembroBtn = new javax.swing.JButton();
+        buscarMiembroBtn = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         nuevaExpedicionBtn1.setText("Nueva Expedicion");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(800, 500));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nuevoMiembro.setText("Nuevo miembro");
-        nuevoMiembro.setActionCommand("Nuevo Miembro");
-        nuevoMiembro.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.setBackground(new java.awt.Color(106, 146, 218));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        nuevoMiembroBtn.setText("Nuevo miembro");
+        nuevoMiembroBtn.setActionCommand("Nuevo Miembro");
+        nuevoMiembroBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoMiembroActionPerformed(evt);
+                nuevoMiembroBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(nuevoMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, 40));
 
         volverBtn.setText("Volver");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -83,6 +93,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 volverBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(volverBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, -1, 39));
 
         MiembrosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -97,30 +108,43 @@ public class MiembrosFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(MiembrosTable);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 545, 300));
+
         expedicionesProcesoLabel.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
+        expedicionesProcesoLabel.setForeground(new java.awt.Color(0, 0, 0));
         expedicionesProcesoLabel.setText("Miembros De la expedicion");
+        jPanel1.add(expedicionesProcesoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         picoIdLabel.setText("Nacionalidad");
+        jPanel1.add(picoIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
 
         accidenteIdLabel.setText("Nombre");
+        jPanel1.add(accidenteIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, 70, -1));
 
         altitudLabel.setText("Apellido:");
+        jPanel1.add(altitudLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
 
         cuposLabel.setText("Sexo");
+        jPanel1.add(cuposLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
 
-        mortalidadLabel.setText("es lider");
+        mortalidadLabel.setText("Es lider");
+        jPanel1.add(mortalidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
 
-        fechaLabel.setText("es staff");
+        fechaLabel.setText("Es staff");
+        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, -1, -1));
 
-        resultadoLabel.setText("año nacimiento");
+        resultadoLabel.setText("Año nacimiento");
+        jPanel1.add(resultadoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
 
         motivoLabel.setText("Fallecido");
+        jPanel1.add(motivoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, -1, -1));
 
         Nacionalidadtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NacionalidadtxtActionPerformed(evt);
             }
         });
+        jPanel1.add(Nacionalidadtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 108, 27));
 
         ApellidoTxt.setMinimumSize(new java.awt.Dimension(120, 120));
         ApellidoTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +152,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 ApellidoTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(ApellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 108, 27));
 
         Nombretxt.setMinimumSize(new java.awt.Dimension(120, 120));
         Nombretxt.addActionListener(new java.awt.event.ActionListener() {
@@ -135,12 +160,16 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 NombretxtActionPerformed(evt);
             }
         });
+        jPanel1.add(Nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 108, 27));
 
         SexoTxt.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel1.add(SexoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 108, 27));
 
         lidertxt.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel1.add(lidertxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 110, 27));
 
         staftxt.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel1.add(staftxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 110, 27));
 
         Nacimientotxt.setMinimumSize(new java.awt.Dimension(120, 120));
         Nacimientotxt.addActionListener(new java.awt.event.ActionListener() {
@@ -148,163 +177,55 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 NacimientotxtActionPerformed(evt);
             }
         });
+        jPanel1.add(Nacimientotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 110, 27));
 
         fallecidoTxt.setMinimumSize(new java.awt.Dimension(120, 120));
+        jPanel1.add(fallecidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 110, 27));
 
-        Miembros.setText("Expedicion");
-        Miembros.addActionListener(new java.awt.event.ActionListener() {
+        expedicionesBtn.setText("Expedicion");
+        expedicionesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MiembrosActionPerformed(evt);
+                expedicionesBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(expedicionesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, -1, 39));
 
-        BorrarBtn1.setText("Borrar");
-        BorrarBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BorrarBtn1ActionPerformed(evt);
+        borrarFormBtn.setText("Limpiar Formulario");
+        borrarFormBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                borrarFormBtnMouseClicked(evt);
             }
         });
-
-        BorrarMiembrobutton.setText("Borrar miembro");
-        BorrarMiembrobutton.addActionListener(new java.awt.event.ActionListener() {
+        borrarFormBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BorrarMiembrobuttonActionPerformed(evt);
+                borrarFormBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(borrarFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 160, 39));
 
-        buscarMiembro.setText("Buscar miembros exp.");
-        buscarMiembro.addActionListener(new java.awt.event.ActionListener() {
+        borrarMiembroBtn.setText("Borrar miembro");
+        borrarMiembroBtn.setMaximumSize(new java.awt.Dimension(121, 27));
+        borrarMiembroBtn.setMinimumSize(new java.awt.Dimension(121, 27));
+        borrarMiembroBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarMiembroActionPerformed(evt);
+                borrarMiembroBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(borrarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(expedicionesProcesoLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(nuevoMiembro)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BorrarMiembrobutton)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(volverBtn)
-                                    .addGap(55, 55, 55)
-                                    .addComponent(Miembros)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(235, 235, 235)
-                                .addComponent(buscarMiembro)))
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(picoIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(altitudLabel)
-                                        .addComponent(cuposLabel)
-                                        .addComponent(mortalidadLabel)
-                                        .addComponent(accidenteIdLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Nombretxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(ApellidoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(SexoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lidertxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Nacionalidadtxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(resultadoLabel)
-                                        .addComponent(motivoLabel)
-                                        .addComponent(fechaLabel))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(Nacimientotxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(fallecidoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(staftxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(BorrarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(expedicionesProcesoLabel)
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(picoIdLabel)
-                            .addComponent(Nacionalidadtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(accidenteIdLabel)
-                            .addComponent(Nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ApellidoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(SexoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cuposLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lidertxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mortalidadLabel)))
-                            .addComponent(altitudLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(staftxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Nacimientotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resultadoLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fallecidoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(motivoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BorrarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(37, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(volverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nuevoMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Miembros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BorrarMiembrobutton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        buscarMiembroBtn.setText("Buscar miembros exp.");
+        buscarMiembroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarMiembroBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buscarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, -1, 39));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-        );
+        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
+        background.setText("jLabel1");
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, -20, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 854, 542));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -475,11 +396,11 @@ private synchronized void enlazarAExpedicion(){
         // TODO add your handling code here:
     }//GEN-LAST:event_NombretxtActionPerformed
 //Boton de  agregar miembros a expedicion
-    private void MiembrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiembrosActionPerformed
+    private void expedicionesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expedicionesBtnActionPerformed
         enlazarAExpedicion();
-    }//GEN-LAST:event_MiembrosActionPerformed
+    }//GEN-LAST:event_expedicionesBtnActionPerformed
 //Boton que borra lo puesto en las celdas
-    private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarBtn1ActionPerformed
+    private void borrarFormBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarFormBtnActionPerformed
         Nacionalidadtxt.setText("");
         Nombretxt.setText("");
         ApellidoTxt.setText("");
@@ -489,17 +410,17 @@ private synchronized void enlazarAExpedicion(){
         Nacimientotxt.setText("");
         fallecidoTxt.setText("");
 
-    }//GEN-LAST:event_BorrarBtn1ActionPerformed
+    }//GEN-LAST:event_borrarFormBtnActionPerformed
 
-    private void nuevoMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoMiembroActionPerformed
+    private void nuevoMiembroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoMiembroBtnActionPerformed
         agregarMiembro();
-    }//GEN-LAST:event_nuevoMiembroActionPerformed
+    }//GEN-LAST:event_nuevoMiembroBtnActionPerformed
 
     private void NacimientotxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NacimientotxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NacimientotxtActionPerformed
     //Borra miembro de linea seleccionada
-    private void BorrarMiembrobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarMiembrobuttonActionPerformed
+    private void borrarMiembroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarMiembroBtnActionPerformed
     Miembros miembro = obtenerMiembroListado();//Miembro seleccionado
     if (miembro == null) {// si no esta seleccionado no hace nada
         return; 
@@ -509,14 +430,14 @@ private synchronized void enlazarAExpedicion(){
             "Confirmar eliminación", JOptionPane.YES_NO_OPTION);//Asegurar q va a eliminar bien
     if (confirmacion == JOptionPane.YES_OPTION) {
         muestra.remove(miembro); // elimina de la lista
-        //if(miembro.getId()){}
-        cargarTablaMiembros();         // actualiza la JTable
+        //if(miembro.getId()){}        // actualiza la JTable
         JOptionPane.showMessageDialog(null, "Miembro eliminado correctamente.");
+        cargarTablaMiembros(); 
     }
     }
-    }//GEN-LAST:event_BorrarMiembrobuttonActionPerformed
+    }//GEN-LAST:event_borrarMiembroBtnActionPerformed
 
-    private void buscarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMiembroActionPerformed
+    private void buscarMiembroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMiembroBtnActionPerformed
         String input = JOptionPane.showInputDialog(this, "Ingrese el ID de la expedición:", "Buscar Miembros", JOptionPane.QUESTION_MESSAGE);
     if (input != null && !input.trim().isEmpty()) {
         try {
@@ -546,7 +467,11 @@ private synchronized void enlazarAExpedicion(){
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    }//GEN-LAST:event_buscarMiembroActionPerformed
+    }//GEN-LAST:event_buscarMiembroBtnActionPerformed
+
+    private void borrarFormBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrarFormBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_borrarFormBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -585,9 +510,6 @@ private synchronized void enlazarAExpedicion(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ApellidoTxt;
-    private javax.swing.JButton BorrarBtn1;
-    private javax.swing.JButton BorrarMiembrobutton;
-    private javax.swing.JButton Miembros;
     private javax.swing.JTable MiembrosTable;
     private javax.swing.JTextField Nacimientotxt;
     private javax.swing.JTextField Nacionalidadtxt;
@@ -595,8 +517,12 @@ private synchronized void enlazarAExpedicion(){
     private javax.swing.JTextField SexoTxt;
     private javax.swing.JLabel accidenteIdLabel;
     private javax.swing.JLabel altitudLabel;
-    private javax.swing.JButton buscarMiembro;
+    private javax.swing.JLabel background;
+    private javax.swing.JButton borrarFormBtn;
+    private javax.swing.JButton borrarMiembroBtn;
+    private javax.swing.JButton buscarMiembroBtn;
     private javax.swing.JLabel cuposLabel;
+    private javax.swing.JButton expedicionesBtn;
     private javax.swing.JLabel expedicionesProcesoLabel;
     private javax.swing.JTextField fallecidoTxt;
     private javax.swing.JLabel fechaLabel;
@@ -606,7 +532,7 @@ private synchronized void enlazarAExpedicion(){
     private javax.swing.JLabel mortalidadLabel;
     private javax.swing.JLabel motivoLabel;
     private javax.swing.JButton nuevaExpedicionBtn1;
-    private javax.swing.JButton nuevoMiembro;
+    private javax.swing.JButton nuevoMiembroBtn;
     private javax.swing.JLabel picoIdLabel;
     private javax.swing.JLabel resultadoLabel;
     private javax.swing.JTextField staftxt;

@@ -321,7 +321,6 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         fechaLabel = new javax.swing.JLabel();
         resultadoLabel = new javax.swing.JLabel();
         motivoLabel = new javax.swing.JLabel();
-        picoIdTxt = new javax.swing.JTextField();
         rutaElegidaLabel = new javax.swing.JLabel();
         altitudTxt = new javax.swing.JTextField();
         accidenteIdTxt = new javax.swing.JTextField();
@@ -334,9 +333,17 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         BorrarBtn1 = new javax.swing.JButton();
         picos = new javax.swing.JButton();
         miembros = new javax.swing.JButton();
+        picoIdTxt = new javax.swing.JTextField();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(800, 500));
+        setSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(106, 146, 218));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nuevaExpedicionBtn.setText("Nueva Expedicion");
         nuevaExpedicionBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -344,6 +351,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 nuevaExpedicionBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(nuevaExpedicionBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 130, 39));
 
         volverBtn.setText("Volver");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -351,6 +359,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 volverBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(volverBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, -1, 39));
 
         cambiarResultadoBtn.setText("Cambiar Expedicion");
         cambiarResultadoBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -358,6 +367,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 cambiarResultadoBtnActionPerformed(evt);
             }
         });
+        jPanel1.add(cambiarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, 39));
 
         expedicionesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -372,50 +382,64 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(expedicionesTable);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 18, 563, 300));
+
         expedicionesProcesoLabel.setFont(new java.awt.Font("Segoe UI Historic", 1, 12)); // NOI18N
         expedicionesProcesoLabel.setText("Expediciones en proceso");
+        jPanel1.add(expedicionesProcesoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, -1, -1));
 
         picoIdLabel.setText("Pico ID:");
+        jPanel1.add(picoIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 20, -1, -1));
 
         accidenteIdLabel.setText("Accidente ID:");
+        jPanel1.add(accidenteIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 48, -1, -1));
 
         altitudLabel.setText("Altitud:");
+        jPanel1.add(altitudLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 78, -1, -1));
 
         cuposLabel.setText("Cupos:");
+        jPanel1.add(cuposLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 112, -1, -1));
 
         mortalidadLabel.setText("Mortalidad");
+        jPanel1.add(mortalidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 144, -1, -1));
 
         fechaLabel.setText("Fecha: ");
+        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 180, -1, -1));
 
         resultadoLabel.setText("Resultado:");
+        jPanel1.add(resultadoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 220, -1, -1));
 
         motivoLabel.setText("Motivo:");
-
-        picoIdTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                picoIdTxtActionPerformed(evt);
-            }
-        });
+        jPanel1.add(motivoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 258, -1, -1));
 
         rutaElegidaLabel.setText("Ruta Elegida: ");
+        jPanel1.add(rutaElegidaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 298, -1, -1));
 
         altitudTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 altitudTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(altitudTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 78, 70, 20));
 
         accidenteIdTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accidenteIdTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(accidenteIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 46, 70, 20));
+        jPanel1.add(cuposTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 110, 70, 20));
 
         mortalidadTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mortalidadTxtActionPerformed(evt);
             }
         });
+        jPanel1.add(mortalidadTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 142, 70, 20));
+        jPanel1.add(fechaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 180, 70, 20));
+        jPanel1.add(resultadoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 218, 70, 20));
+        jPanel1.add(rutaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 296, 70, 20));
+        jPanel1.add(motivoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 256, 70, 20));
 
         BorrarBtn1.setText("Borrar");
         BorrarBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -423,6 +447,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 BorrarBtn1ActionPerformed(evt);
             }
         });
+        jPanel1.add(BorrarBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, -1, 39));
 
         picos.setText("Picos");
         picos.addActionListener(new java.awt.event.ActionListener() {
@@ -430,6 +455,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 picosActionPerformed(evt);
             }
         });
+        jPanel1.add(picos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 118, 39));
 
         miembros.setText("Miembros");
         miembros.addActionListener(new java.awt.event.ActionListener() {
@@ -437,122 +463,20 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 miembrosActionPerformed(evt);
             }
         });
+        jPanel1.add(miembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 118, 39));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(expedicionesProcesoLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(volverBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nuevaExpedicionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cambiarResultadoBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BorrarBtn1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(picos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(miembros, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(accidenteIdLabel)
-                                    .addComponent(picoIdLabel)
-                                    .addComponent(altitudLabel)
-                                    .addComponent(cuposLabel)
-                                    .addComponent(mortalidadLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mortalidadTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cuposTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(altitudTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(accidenteIdTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(picoIdTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(rutaElegidaLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(rutaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(resultadoLabel)
-                                    .addComponent(motivoLabel)
-                                    .addComponent(fechaLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(motivoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(resultadoTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(expedicionesProcesoLabel)
-                .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(picoIdLabel)
-                            .addComponent(picoIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(accidenteIdLabel)
-                            .addComponent(accidenteIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(altitudTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cuposTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cuposLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(mortalidadTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mortalidadLabel)))
-                            .addComponent(altitudLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fechaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fechaLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(resultadoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(resultadoLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(motivoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(motivoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rutaElegidaLabel)
-                            .addComponent(rutaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(2, 2, 2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nuevaExpedicionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(picos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cambiarResultadoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BorrarBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(volverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(miembros, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
+        picoIdTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                picoIdTxtActionPerformed(evt);
+            }
+        });
+        jPanel1.add(picoIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 18, 70, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 750, 420));
+        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
+        background.setText("jLabel1");
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -567,10 +491,6 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     private void altitudTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altitudTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_altitudTxtActionPerformed
-
-    private void picoIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_picoIdTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_picoIdTxtActionPerformed
 
     private void cambiarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarResultadoBtnActionPerformed
      String inputId = JOptionPane.showInputDialog(
@@ -717,6 +637,10 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
     private void mortalidadTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mortalidadTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mortalidadTxtActionPerformed
+
+    private void picoIdTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_picoIdTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_picoIdTxtActionPerformed
      
 private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {
     String input = JOptionPane.showInputDialog(this, "Ingrese el ID de la expedición a eliminar:");
@@ -792,6 +716,7 @@ private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JTextField accidenteIdTxt;
     private javax.swing.JLabel altitudLabel;
     private javax.swing.JTextField altitudTxt;
+    private javax.swing.JLabel background;
     private javax.swing.JButton cambiarResultadoBtn;
     private javax.swing.JLabel cuposLabel;
     private javax.swing.JTextField cuposTxt;
