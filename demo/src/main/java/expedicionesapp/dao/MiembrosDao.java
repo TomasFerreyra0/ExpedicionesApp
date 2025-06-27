@@ -13,15 +13,131 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MiembrosDao {
-      public Miembros getMemberById(int idMiembro) {
+public class MiembrosDao implements DAO {
+    //insertar un nuevo miembro
+    @Override
+    public boolean create(Object o) {
+        boolean estado = false;
+        if(o instanceof Miembros){
+            Miembros miembro = (Miembros) o;
+            String sql = """
+            INSERT INTO Miembros (nacionalidad, nombre, apellido, sexo, es_lider, es_staff, año_nacimiento,fallecido)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """; 
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, miembro.getNacionalidad());
+            stmt.setString(2, miembro.getNombre());
+            stmt.setString(3, miembro.getApellido());
+            stmt.setString(4, miembro.getSexo());
+            stmt.setInt(5, miembro.getEs_lider());
+            stmt.setInt(6, miembro.getEs_staff());
+            stmt.setInt(7, miembro.getAno_nacimiento());
+            stmt.setInt(8,miembro.getFallecido());
+            
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                // Recuperar el ID generado si es auto-incremental
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        miembro.setId(generatedKeys.getInt(1));
+                    }
+                }
+                System.out.println("Expedición insertada correctamente con ID: " + miembro.getId());
+                estado = true;
+            } else {
+                System.out.println("No se pudo insertar la expedición.");
+                estado =  false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al insertar la expedición: " + e.getMessage());
+            estado = false;
+        }
+        }
+        return estado;
+    }
+
+    //modificar un miembro existente
+    @Override
+    public boolean modify(Object o) {
+        boolean estado = false;
+        if(o instanceof Miembros){
+            Miembros miembro = (Miembros) o;
+            String sql = """
+            UPDATE Miembros SET nacionalidad=?, nombre=?, apellido=?, sexo=?, es_lider=?, es_staff=?, año_nacimiento=?,fallecido=?
+            WHERE id = ?
+            """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, miembro.getNacionalidad());
+            stmt.setString(2, miembro.getNombre());
+            stmt.setString(3, miembro.getApellido());
+            stmt.setString(4, miembro.getSexo());
+            stmt.setInt(5, miembro.getEs_lider());
+            stmt.setInt(6, miembro.getEs_staff());
+            stmt.setInt(7, miembro.getAno_nacimiento());
+            stmt.setInt(8,miembro.getFallecido());
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Expedición con ID " + miembro.getId() + " actualizada correctamente.");
+                estado = true;
+            } else {
+                System.out.println("No se encontró la expedición con ID " + miembro.getId() + " para actualizar.");
+                estado = false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al modificar la expedición: " + e.getMessage());
+            estado = false;
+        }
+        }
+        return estado;
+    }
+
+    //eliminar un miembro por id
+    @Override
+    public boolean delete(int id) {
+        String sql = "DELETE FROM Miembros WHERE id = ?"; // Asumo 'id' es el PK
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Expedición con ID " + id+ " eliminada correctamente.");
+                return true;
+            } else {
+                System.out.println("No se encontró la expedición con ID " + id + " para eliminar.");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al borrar la expedición: " + e.getMessage());
+            return false;
+        }
+    }
+
+    //obtener un miembro por id
+    @Override
+    public Object getEntityById(int id) {
         String sql = "SELECT * FROM Miembros WHERE id = ?";
         Miembros miembro = null; // Inicializamos a null por si no se encuentra
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, idMiembro);
+            stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
 
                 if (rs.next()) {
@@ -44,8 +160,13 @@ public class MiembrosDao {
         return miembro; // Devuelve el objeto Expediciones o null si no se encontró
     }
 
-//Mostrar Miembros por expedicion
-public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
+    @Override
+    public void showObjectById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    //Mostrar Miembros por expedicion
+    public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
     String sql = "SELECT * FROM expedicionxmiembro_vw WHERE id_expedicion = ?";
     List<Object[]> datos = new ArrayList<>();
 
@@ -77,110 +198,7 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
     return datos;
 }
 
-
-
-    // 2. Insertar un nuevo miembro
-    public boolean insertMember(Miembros miembro) {
-        String sql = """
-            INSERT INTO Miembros (nacionalidad, nombre, apellido, sexo, es_lider, es_staff, año_nacimiento,fallecido)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """; 
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-
-            stmt.setString(1, miembro.getNacionalidad());
-            stmt.setString(2, miembro.getNombre());
-            stmt.setString(3, miembro.getApellido());
-            stmt.setString(4, miembro.getSexo());
-            stmt.setInt(5, miembro.getEs_lider());
-            stmt.setInt(6, miembro.getEs_staff());
-            stmt.setInt(7, miembro.getAno_nacimiento());
-            stmt.setInt(8,miembro.getFallecido());
-            
-
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                // Recuperar el ID generado si es auto-incremental
-                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        miembro.setId(generatedKeys.getInt(1));
-                    }
-                }
-                System.out.println("Expedición insertada correctamente con ID: " + miembro.getId());
-                return true;
-            } else {
-                System.out.println("No se pudo insertar la expedición.");
-                return false;
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error al insertar la expedición: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // 3. Actualizar un miembro existente
-    public boolean modifyMember(Miembros miembro) {
-        String sql = """
-            UPDATE Miembros SET nacionalidad=?, nombre=?, apellido=?, sexo=?, es_lider=?, es_staff=?, año_nacimiento=?,fallecido=?
-            WHERE id = ?
-            """;
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, miembro.getNacionalidad());
-            stmt.setString(2, miembro.getNombre());
-            stmt.setString(3, miembro.getApellido());
-            stmt.setString(4, miembro.getSexo());
-            stmt.setInt(5, miembro.getEs_lider());
-            stmt.setInt(6, miembro.getEs_staff());
-            stmt.setInt(7, miembro.getAno_nacimiento());
-            stmt.setInt(8,miembro.getFallecido());
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Expedición con ID " + miembro.getId() + " actualizada correctamente.");
-                return true;
-            } else {
-                System.out.println("No se encontró la expedición con ID " + miembro.getId() + " para actualizar.");
-                return false;
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error al modificar la expedición: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // 4. Eliminar un miembro por ID
-    public boolean deleteMember(int idMiembro) {
-        String sql = "DELETE FROM Miembros WHERE id = ?"; // Asumo 'id' es el PK
-
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setInt(1, idMiembro);
-
-            int rowsAffected = stmt.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Expedición con ID " + idMiembro+ " eliminada correctamente.");
-                return true;
-            } else {
-                System.out.println("No se encontró la expedición con ID " + idMiembro + " para eliminar.");
-                return false;
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error al borrar la expedición: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // 5. Obtener todos los miembros
+    //Obtener todos los miembros
     public List<Miembros> getAllMembers() {
         List<Miembros> membersList = new ArrayList<>();
         String sql = "SELECT * FROM Miembros";
@@ -208,8 +226,7 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
         return membersList;
     }
 
-
-    // 6. Contar Miembros
+    //Contar Miembros
     public int getAllMembersCount() {
         String sql = "SELECT COUNT(*) FROM Miembros";
         int count = 0;
@@ -224,6 +241,7 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
         }
         return count;
     }
+    
     public boolean tieneMiembrosAsociados(int idExpedicion) {
     String sql = "SELECT COUNT(*) FROM miembros_expediciones WHERE id_expedicion = ?";
 
@@ -243,7 +261,8 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
 
     return false;
 }
-        //7 Busca si el miembro existe
+    
+    //Busca si el miembro existe
     public int miembroYaExiste(Miembros miembro) throws SQLException {
     Connection conn = DBConnection.getConnection();
     String sql = "SELECT id FROM miembros WHERE " +
@@ -268,7 +287,8 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
         }
     }
     }
-    //8 devuelve el ultimo miembro
+    
+    //Devuelve el ultimo miembro
     public Miembros obtenerUltimoMiembro() throws SQLException {
     Connection conn = DBConnection.getConnection();
     String sql = "SELECT TOP 1 * FROM Miembros ORDER BY id DESC";
@@ -289,8 +309,9 @@ public List<Object[]> obtenerMiembrosPorExpedicion(int idExpedicion) {
         }else{return null;}
     }
     }
-    //9 inserta miembro pero devolviendo el objeto que inserto
-        public Miembros insertMember2(Miembros miembro) {
+    
+    //Inserta miembro pero devolviendo el objeto que inserto
+    public Miembros insertMember2(Miembros miembro) {
         String sql = """
             INSERT INTO Miembros (nacionalidad, nombre, apellido, sexo, es_lider, es_staff, año_nacimiento,fallecido)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)

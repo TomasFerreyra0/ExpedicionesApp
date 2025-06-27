@@ -85,7 +85,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 nuevoMiembroBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(nuevoMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, -1, 40));
+        jPanel1.add(nuevoMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, 40));
 
         volverBtn.setText("Volver");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -128,10 +128,10 @@ public class MiembrosFrame extends javax.swing.JFrame {
         jPanel1.add(cuposLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
 
         mortalidadLabel.setText("Es lider");
-        jPanel1.add(mortalidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 190, -1, -1));
+        jPanel1.add(mortalidadLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, -1, -1));
 
         fechaLabel.setText("Es staff");
-        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, -1, -1));
+        jPanel1.add(fechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 220, -1, -1));
 
         resultadoLabel.setText("Año nacimiento");
         jPanel1.add(resultadoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, -1, -1));
@@ -144,7 +144,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 NacionalidadtxtActionPerformed(evt);
             }
         });
-        jPanel1.add(Nacionalidadtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 108, 27));
+        jPanel1.add(Nacionalidadtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 108, 27));
 
         ApellidoTxt.setMinimumSize(new java.awt.Dimension(120, 120));
         ApellidoTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +152,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 ApellidoTxtActionPerformed(evt);
             }
         });
-        jPanel1.add(ApellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 108, 27));
+        jPanel1.add(ApellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 108, 27));
 
         Nombretxt.setMinimumSize(new java.awt.Dimension(120, 120));
         Nombretxt.addActionListener(new java.awt.event.ActionListener() {
@@ -160,16 +160,16 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 NombretxtActionPerformed(evt);
             }
         });
-        jPanel1.add(Nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 60, 108, 27));
+        jPanel1.add(Nombretxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 60, 108, 27));
 
         SexoTxt.setMinimumSize(new java.awt.Dimension(120, 120));
-        jPanel1.add(SexoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 140, 108, 27));
+        jPanel1.add(SexoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 108, 27));
 
         lidertxt.setMinimumSize(new java.awt.Dimension(120, 120));
-        jPanel1.add(lidertxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 180, 110, 27));
+        jPanel1.add(lidertxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 110, 27));
 
         staftxt.setMinimumSize(new java.awt.Dimension(120, 120));
-        jPanel1.add(staftxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 220, 110, 27));
+        jPanel1.add(staftxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 220, 110, 27));
 
         Nacimientotxt.setMinimumSize(new java.awt.Dimension(120, 120));
         Nacimientotxt.addActionListener(new java.awt.event.ActionListener() {
@@ -177,10 +177,10 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 NacimientotxtActionPerformed(evt);
             }
         });
-        jPanel1.add(Nacimientotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, 110, 27));
+        jPanel1.add(Nacimientotxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 260, 110, 27));
 
         fallecidoTxt.setMinimumSize(new java.awt.Dimension(120, 120));
-        jPanel1.add(fallecidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 110, 27));
+        jPanel1.add(fallecidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 110, 27));
 
         expedicionesBtn.setText("Expedicion");
         expedicionesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 expedicionesBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(expedicionesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 360, -1, 39));
+        jPanel1.add(expedicionesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, -1, 39));
 
         borrarFormBtn.setText("Limpiar Formulario");
         borrarFormBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,7 +201,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 borrarFormBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(borrarFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 360, 160, 39));
+        jPanel1.add(borrarFormBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 160, 39));
 
         borrarMiembroBtn.setText("Borrar miembro");
         borrarMiembroBtn.setMaximumSize(new java.awt.Dimension(121, 27));
@@ -211,7 +211,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 borrarMiembroBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(borrarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, 40));
+        jPanel1.add(borrarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 360, -1, 40));
 
         buscarMiembroBtn.setText("Buscar miembros exp.");
         buscarMiembroBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -219,13 +219,13 @@ public class MiembrosFrame extends javax.swing.JFrame {
                 buscarMiembroBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(buscarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, -1, 39));
+        jPanel1.add(buscarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, 39));
 
         background.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
         background.setText("jLabel1");
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, -20, -1, -1));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 500));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 854, 542));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -261,7 +261,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
         this.dispose(); // 'this' se refiere al JFrame actual
     }//GEN-LAST:event_volverBtnActionPerformed
     private void agregarMiembro(){
-            // Validar campos String
+    // Validar campos String
     String nacionalidad = Nacionalidadtxt.getText().trim();
     String nombre = Nombretxt.getText().trim();
     String apellido = ApellidoTxt.getText().trim();
@@ -331,18 +331,18 @@ public class MiembrosFrame extends javax.swing.JFrame {
     }
     cargarTablaMiembros();
 }//agrega miembro a su lista correspondiente
-private synchronized void enlazarAExpedicion(){
+    private synchronized void enlazarAExpedicion(){
         String input = JOptionPane.showInputDialog(null, "Ingrese el Id de la expedicion:");//Muestra el input
 
         if(input !=null && !input.trim().isEmpty()){
             try{
                 int idExpedicion = Integer.parseInt(input.trim());
-                Expediciones expedicion=expsDAO.getExpeditionById(idExpedicion);
+                Expediciones expedicion=(Expediciones) expsDAO.getEntityById(idExpedicion);
                 if(expedicion!=null){//si la expedicion existe
                     JOptionPane.showMessageDialog(null, "Expedicion seleccionada " + expedicion.getId()+ " Fecha "+ expedicion.getFecha());
                     for(Miembros miembroA:miembrosNuevos){
                         try{
-                            if(mmbrsDAO.insertMember(miembroA)){//si el miembro nuevo se añade a la tabla de miembros
+                            if(mmbrsDAO.create(miembroA)){//si el miembro nuevo se añade a la tabla de miembros
                                 Miembros aux = mmbrsDAO.obtenerUltimoMiembro();
                                 listaMiembros.add(aux);//Se añade a la lista de miembros que se va a enlazar a la expedicion
                                 System.out.println("Id ultimo miembro: "+ aux.getId());
@@ -375,6 +375,7 @@ private synchronized void enlazarAExpedicion(){
     miembrosNuevos = new ArrayList();
     cargarTablaMiembros();
     }//inserta miembros nuevos
+
     private Miembros obtenerMiembroListado(){
         int miembroS = MiembrosTable.getSelectedRow();
         if(miembroS == -1){

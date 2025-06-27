@@ -57,7 +57,7 @@ public class PicoFrame extends javax.swing.JFrame {
     private void agregarPico() {
         Pico nuevo = pedirDatosPico(null);
         if (nuevo != null) {
-            dao.insertPeak(nuevo); // insert también usa modify en tu código
+            dao.create(nuevo);
             actualizarTabla();
         }
     }
@@ -82,7 +82,7 @@ public class PicoFrame extends javax.swing.JFrame {
             Pico original = modelo.getPicoAt(fila);
             Pico modificado = pedirDatosPico(original);
             if (modificado != null) {
-                dao.modifyPeak(modificado);
+                dao.modify(modificado);
                 actualizarTabla();
             }
         } else {

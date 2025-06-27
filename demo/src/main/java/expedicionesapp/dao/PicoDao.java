@@ -9,40 +9,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PicoDao {
-        // Muestra UN solo pico por su ID
-   public void showPeakById(int id) {
-        String sql = "SELECT * FROM Pico WHERE id = ?";
+public class PicoDao implements DAO {
+    @Override
+    public boolean create(Object o) {
+        boolean estado = false;
+        if(o instanceof Pico){
+            Pico pico = (Pico) o;
+            String sql = """
+                    INSERT INTO Pico (localizacion, nombrePico, abierto, altura, cambio_trekking, sin_aprobacion, estado, host, restricciones)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                try (Connection conn = DBConnection.getConnection();
+                     PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
+                    stmt.setString(1, pico.getLocalizacion());
+                    stmt.setString(2, pico.getNombrePico());
+                    stmt.setInt(3, pico.getAbierto());
+                    stmt.setFloat(4, pico.getAltura());
+                    stmt.setInt(5, pico.getCambio_trekking());
+                    stmt.setInt(6, pico.getSin_aprobacion());
+                    stmt.setString(7, pico.getEstado());
+                    stmt.setInt(8, pico.getHost());
+                    stmt.setInt(9, pico.getRestricciones());
 
-            if (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id"));
-                System.out.println("Nombre del Pico: " + rs.getString("nombrePico"));
-                System.out.println("Localización: " + rs.getString("localizacion"));
-                System.out.println("Abierto: " + rs.getInt("abierto"));
-                System.out.println("Altura: " + rs.getFloat("altura"));
-                System.out.println("Cambio Trekking: " + rs.getInt("cambio_trekking"));
-                System.out.println("Sin Aprobación: " + rs.getInt("sin_aprobacion"));
-                System.out.println("Estado: " + rs.getString("estado"));
-                System.out.println("ID Host: " + rs.getInt("host"));
-                System.out.println("ID Restricciones: " + rs.getInt("restricciones"));
-            } else {
-                System.out.println("No se encontro ningun pico con el ID " + id);
-            }
+                    int rows = stmt.executeUpdate();
+                    if (rows > 0) {
+                        try (ResultSet keys = stmt.getGeneratedKeys()) {
+                            if (keys.next()) {
+                                pico.setId(keys.getInt(1));
+                            }
+                        }
+                        System.out.println("Pico insertado correctamente con ID: " + pico.getId());
+                        estado = true;
+                    } else {
+                        System.out.println("No se pudo insertar el pico.");
+                        estado = false;
+                    }
 
-        } catch (SQLException e) {
-            System.err.println("Error al mostrar el pico: " + e.getMessage());
+                } catch (SQLException e) {
+                    System.err.println("Error al insertar el pico: " + e.getMessage());
+                    estado = false;
+                }
         }
+        return estado;
     }
-   
-   
-       // Modifica los campos de estado del pico
-   public void modifyPeak(Pico pico) {
+
+    @Override
+    public boolean modify(Object o) {
+        boolean estado = false;
+        if(o instanceof Pico){
+        Pico pico = (Pico) o;
         String sql = """
                 UPDATE Pico SET
                     localizacion = ?,
@@ -73,16 +90,58 @@ public class PicoDao {
             int rows = stmt.executeUpdate();
             if (rows > 0) {
                 System.out.println("Pico actualizado correctamente.");
+                estado = true;
+                
             } else {
                 System.out.println("No se encontró un pico con ese ID.");
+                estado = false;
             }
 
         } catch (SQLException e) {
             System.err.println("Error al modificar el pico: " + e.getMessage());
+            estado = false;
+        }
+        }
+        return estado;
+    }
+
+    @Override
+    public boolean delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void showObjectById(int id) {
+        String sql = "SELECT * FROM Pico WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("Nombre del Pico: " + rs.getString("nombrePico"));
+                System.out.println("Localización: " + rs.getString("localizacion"));
+                System.out.println("Abierto: " + rs.getInt("abierto"));
+                System.out.println("Altura: " + rs.getFloat("altura"));
+                System.out.println("Cambio Trekking: " + rs.getInt("cambio_trekking"));
+                System.out.println("Sin Aprobación: " + rs.getInt("sin_aprobacion"));
+                System.out.println("Estado: " + rs.getString("estado"));
+                System.out.println("ID Host: " + rs.getInt("host"));
+                System.out.println("ID Restricciones: " + rs.getInt("restricciones"));
+            } else {
+                System.out.println("No se encontro ningun pico con el ID " + id);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al mostrar el pico: " + e.getMessage());
         }
     }
-   
-   public Pico getPeakById(int id){
+
+    @Override
+    public Object getEntityById(int id) {
         String sql = "SELECT * FROM Pico WHERE id = ?";
         Pico encontrado = new Pico();
 
@@ -112,49 +171,9 @@ public class PicoDao {
         }else{
             return encontrado;
         }
-   }
-   public boolean insertPeak(Pico pico) {
-    String sql = """
-        INSERT INTO Pico (localizacion, nombrePico, abierto, altura, cambio_trekking, sin_aprobacion, estado, host, restricciones)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """;
-
-    try (Connection conn = DBConnection.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-
-        stmt.setString(1, pico.getLocalizacion());
-        stmt.setString(2, pico.getNombrePico());
-        stmt.setInt(3, pico.getAbierto());
-        stmt.setFloat(4, pico.getAltura());
-        stmt.setInt(5, pico.getCambio_trekking());
-        stmt.setInt(6, pico.getSin_aprobacion());
-        stmt.setString(7, pico.getEstado());
-        stmt.setInt(8, pico.getHost());
-        stmt.setInt(9, pico.getRestricciones());
-
-        int rows = stmt.executeUpdate();
-        if (rows > 0) {
-            try (ResultSet keys = stmt.getGeneratedKeys()) {
-                if (keys.next()) {
-                    pico.setId(keys.getInt(1));
-                }
-            }
-            System.out.println("Pico insertado correctamente con ID: " + pico.getId());
-            return true;
-        } else {
-            System.out.println("No se pudo insertar el pico.");
-            return false;
-        }
-
-    } catch (SQLException e) {
-        System.err.println("Error al insertar el pico: " + e.getMessage());
-        return false;
     }
-}
-
-   
-   // Obtiene una lista de todos los picos
-public List<Pico> getAllPeaks() {
+    
+    public List<Pico> getAllPeaks() {
     List<Pico> picos = new ArrayList<>();
     String sql = "SELECT * FROM Pico";
 
@@ -182,6 +201,7 @@ public List<Pico> getAllPeaks() {
     }
     return picos;
 }
+
    
    
    

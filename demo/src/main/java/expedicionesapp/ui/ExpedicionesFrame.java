@@ -181,7 +181,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
                 nuevaExpedicion.setRuta(ruta); 
 
                 //Llamar al método insertExpedition de ExpedicionesDao para guardar en la base de datos
-                boolean insertadoExitosamente = expedicionesDao.insertExpedition(nuevaExpedicion);
+                boolean insertadoExitosamente = expedicionesDao.create(nuevaExpedicion);
 
                 if (insertadoExitosamente) {
                     //Actualizar la tabla si la inserción fue exitosa
@@ -474,9 +474,9 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
 
         background.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
         background.setText("jLabel1");
-        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 420));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -509,7 +509,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         return;
     }
 
-    Expediciones expSel = expedicionesDao.getExpeditionById(idExpedicion);
+    Expediciones expSel = (Expediciones) expedicionesDao.getEntityById(idExpedicion);
     if (expSel == null) {
         JOptionPane.showMessageDialog(this,
             "No se encontró ninguna expedición con ese ID.",
@@ -586,7 +586,7 @@ public class ExpedicionesFrame extends javax.swing.JFrame {
         String ruta = tabla.getValueAt(0, 8).toString().trim();
         nueva.setRuta(ruta);
         
-        boolean ok = expedicionesDao.modifyExpedition(nueva);
+        boolean ok = expedicionesDao.modify(nueva);
         if (ok) {
             expedicionesTableModel.setExpediciones(expedicionesDao.getAllExpeditions());
             tabla.repaint();
@@ -654,7 +654,7 @@ private void BorrarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {
                     " porque tiene miembros asociados.",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
             } else {
-                boolean eliminada = expedicionesDao.deleteExpedition(idExpedicion);
+                boolean eliminada = expedicionesDao.delete(idExpedicion);
                 if (eliminada) {
                     JOptionPane.showMessageDialog(this,
                         "Expedición eliminada correctamente.",

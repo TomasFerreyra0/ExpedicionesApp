@@ -1,6 +1,7 @@
 expedicionesapp\dao\ExpedicionesDao.class
 expedicionesapp\ui\ExpedicionesFrame$6.class
 expedicionesapp\ui\MiembrosFrame$7.class
+expedicionesapp\dao\DAO.class
 expedicionesapp\ui\MiembrosFrame$2.class
 expedicionesapp\ui\ScreenFrame$3.class
 expedicionesapp\model\Miembros.class
