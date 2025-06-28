@@ -94,6 +94,7 @@ public class ExpedicionesDao implements DAO {
 
             if (rowsAffected > 0) {
                 System.out.println("Expedición con ID " + expedicion.getId() + " actualizada correctamente.");
+                System.out.println(expedicion.getMotivo());
                 estado = true;
             } else {
                 System.out.println("No se encontró la expedición con ID " + expedicion.getId() + " para actualizar.");
