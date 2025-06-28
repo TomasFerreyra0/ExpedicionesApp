@@ -48,7 +48,7 @@
         <Component class="javax.swing.JLabel" name="logoLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\54224\Desktop\images\logo.png"/>
+              <Image iconType="3" name="/imagenes/logo.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -77,7 +77,7 @@
         <Component class="javax.swing.JLabel" name="bannerLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\54224\Desktop\images\banner.png"/>
+              <Image iconType="3" name="/imagenes/banner.png"/>
             </Property>
           </Properties>
           <Constraints>
@@ -89,7 +89,7 @@
         <Component class="javax.swing.JLabel" name="backgroundLabel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\54224\Desktop\images\background.png"/>
+              <Image iconType="3" name="/imagenes/background.png"/>
             </Property>
           </Properties>
           <Constraints>

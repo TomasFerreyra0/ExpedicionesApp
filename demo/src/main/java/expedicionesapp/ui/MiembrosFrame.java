@@ -72,7 +72,6 @@ public class MiembrosFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 500));
-        setPreferredSize(new java.awt.Dimension(800, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(106, 146, 218));
@@ -221,7 +220,7 @@ public class MiembrosFrame extends javax.swing.JFrame {
         });
         jPanel1.add(buscarMiembroBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, 39));
 
-        background.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/background.png"))); // NOI18N
         background.setText("jLabel1");
         jPanel1.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 500));
 

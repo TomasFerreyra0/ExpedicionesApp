@@ -26,7 +26,7 @@ public class ScreenFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        logoLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\logo.png")); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo.png"))); // NOI18N
         jPanel1.add(logoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 260, 170));
 
         expedicionesButton.setBackground(new java.awt.Color(60, 93, 119));
@@ -43,10 +43,10 @@ public class ScreenFrame extends javax.swing.JFrame {
         });
         jPanel1.add(expedicionesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, 179, 52));
 
-        bannerLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\banner.png")); // NOI18N
+        bannerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/banner.png"))); // NOI18N
         jPanel1.add(bannerLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
-        backgroundLabel.setIcon(new javax.swing.ImageIcon("C:\\Users\\54224\\Desktop\\images\\background.png")); // NOI18N
+        backgroundLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/background.png"))); // NOI18N
         jPanel1.add(backgroundLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
